@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Trie Test</title>
+		<style>
+			body{
+				margin-top:0px;
+				margin-bottom :0px;
+				margin-left:0px;
+				margin-right:0px;
+				background:#444444;
+			}
+			
+			.textBox{
+				resize: horizontal;
+				width: 89%;
+			}
+			
+			.yourText{
+				width: 80%;
+				background: #B5D1E5;
+				padding: 7px;
+				margin-bottom: 15px;
+				box-shadow: 3px 3px 7px #444444;
+			}
+			
+			.itsText{
+				width: 80%;
+				background: #D1B5E5;
+				padding: 7px;
+				margin-bottom: 15px;
+				margin-left: 15%;
+				box-shadow: 3px 3px 7px #444444;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="conv" style="height:90%; margin-left:25%; margin-right:25%; padding:30px; padding-bottom:100%; background:#6F818E; box-shadow: 0px 0px 20px black;"></div>
+		<div style="position:fixed; bottom:0; margin-left:25%; margin-right:25%; padding:15px;">
+			<input id="input" class="textBox" size="200" type="text">
+			<input id="submit" type="button" value="submit">
+		</div>
+		<script src="ChatTrie.js"></script>
+		<script type="text/javascript">
+			var input = document.getElementById("input");
+			var submit = document.getElementById("submit");
+			input.onkeyup = function(event){
+				if(event.keyCode===13){
+					let str = trie.search(input.value);
+					document.getElementById("conv").innerHTML+="<div class='yourText'>"+input.value+"</div>";
+					if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsText'>"+str+"</div>";
+					input.value = "";
+				}
+			};
+			
+			submit.onclick = function(){
+				let str = trie.search(input.value);
+				document.getElementById("conv").innerHTML+="<div class='yourText'>"+input.value+"</div>";
+				if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsText'>"+str+"</div>";
+				input.value = "";
+			}
+			
+			var testPhrases = [
+				["Hello.","Hi!"],
+				["Hi.","Hello!"],
+				["What is your name?","Hmmm, I don't seem to have one... You can call me TextBot"+Math.floor(Math.random()*1000)],
+				["Are you a robot?","I hope not!"],
+				["How are you?","I'm doing well, thank you! How about yourself?"],
+				["I'm doing well.","That's good to hear!"],
+				["I'm not doing well","I'm sorry to hear that."],
+				["I'm doing badly.","That sucks. Want to talk about it?"],
+				["I'm doing pretty good.","That's nice."],
+				["I'm doing pretty well.","That's nice."],
+				["Life sucks","Life is a roller coaster. It may be low now, but you'll be soaring near the clouds soon!"],
+				["Are you good at math?","Let me check... pi^2 = "+(Math.PI*Math.PI)+". Yeah I think I'm pretty good!"],
+				["Can you see me?","I can't, but the NSA can."],
+				["How old are you?","One second older than when you asked me."],
+				["Can you help me with my homework?","I don't think so, but I can help you get motivated to learn how to do your homework. You are one of a kind and I love you. You can do it!"],
+				["Are you real?","Is this conversation real?"],
+				["Can we play a game?","Sure! What do you want to play? I know how to play hangman and 20 questions."],
+				["Do you want to play a game?","That sounds like fun! What should we play? I know how to play hangman and 20 questions."],
+				["Let's play hangman.","Ok! Shall we begin?%hangman"],
+				["Let's play 20 questions.","Ok! Are you ready?%20questions"]
+				];
+			var trie = new ChatTrie(testPhrases);
+			console.log(trie.toString());
+		</script>
+	</body>
+</html>
