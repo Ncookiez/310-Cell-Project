@@ -3,6 +3,73 @@
   <head>
 
     <title>CELL - Home Page</title>
+    <style>
+    body{
+      height: 100%;
+      weight:100%;
+      background-color: #FFFC80;
+      color:black;
+    }
+    .col-sm,.col-sm-2{
+      margin: 5px;
+      border-radius: 10px;
+
+    }
+
+    #message{
+      float: right;
+      margin: 0 10% 0 0;
+    }
+    #userAv{
+      height: 100px;
+      width: 100px;
+      margin-left: 25%;
+      margin-right: 25%;
+    }
+    #leftBlock{
+      background-color: white;
+    }
+    #gameBlock{
+      background-color: white;
+    }
+    #messageBlock{
+      background-color: white;
+      color: black;
+    }
+    #userImg,#botImg{
+      margin: 10px;
+      height: 30px;
+      width: 30px;
+    }
+    p{
+      margin: inherit;
+    }
+    .botMessage{
+      background-color: beige;
+      border-color: black;
+      border-width: medium;
+      border-radius: 10px;
+      margin: 10px;
+      height:
+    }
+    .userMessage{
+      background-color: #73A0FF;
+      border-color: black;
+      border-width: medium;
+      border-radius: 10px;
+      margin: 10px;
+
+    }
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+
+
+
+    </style>
 
     <!-- Custom CSS -->
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -62,27 +129,10 @@
         </div>
 
         <div id="messageBlock" class="col-sm">
-
-          <div class="botMessage">
-            <img src="user1.png" alt="botAvatar" id="botImg">
-            <p>Hey, I am a bot.</p>
-          </div>
-
-          <div class="userMessage">
-            <img src="user2.png" alt="userAvatar" id="userImg">
-            <p>Hello, I am user.</p>
-          </div>
+          <p>This hold chat block</p>
         </div>
     </div>
 
-  <div id="row2">
-    <div id="space" class="col-sm-10">
-    </div>
-    <div id="message" class="col-sm-2">
-      <textarea rows="2" name="comment" form="usrform">
-        Type message...</textarea>
-    </div>
-  </div>
 
 	<!-- jQuery CDN -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
