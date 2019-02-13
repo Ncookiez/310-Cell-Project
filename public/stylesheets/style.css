@@ -1,0 +1,69 @@
+body{
+  height: 100%;
+  weight:100%;
+  background-color: #FFFC80;
+  color:black;
+}
+.col-sm{
+  margin: 5px;
+  border-radius: 10px;
+}
+/*.column{
+  border-radius: 10px;
+  float: left;
+  margin: 1%;
+  height: 400px;
+  width: 30%;
+}
+*/
+#message{
+  float: right;
+  margin: 0 10% 0 0;
+}
+#userAv{
+  height: 100px;
+  width: 100px;
+}
+#leftBlock{
+  background-color: white;
+}
+#gameBlock{
+  background-color: white;
+}
+#messageBlock{
+  background-color: white;
+  color: black;
+}
+#userImg,#botImg{
+  margin: 10px;
+  height: 30px;
+  width: 30px;
+}
+p{
+  margin: inherit;
+}
+.botMessage{
+  background-color: beige;
+  border-color: black;
+  border-width: medium;
+  border-radius: 10px;
+  margin: 10px;
+  height:
+}
+.userMessage{
+  background-color: #73A0FF;
+  border-color: black;
+  border-width: medium;
+  border-radius: 10px;
+  margin: 10px;
+
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+@media(max-width:736px){
+}
