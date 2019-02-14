@@ -1,0 +1,29 @@
+body {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	background: #444444;
+}
+
+.textBox {
+	resize: horizontal;
+	width: 89%;
+}
+
+.yourText {
+	width: 80%;
+	background: #B5D1E5;
+	padding: 7px;
+	margin-bottom: 15px;
+	box-shadow: 3px 3px 7px #444444;
+}
+
+.itsText {
+	width: 80%;
+	background: #D1B5E5;
+	padding: 7px;
+	margin-bottom: 15px;
+	margin-left: 15%;
+	box-shadow: 3px 3px 7px #444444;
+}
