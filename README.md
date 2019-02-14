@@ -6,8 +6,8 @@ COSC 310 - Group 24
 ## Contents
 
 * [About](#About)
-* [How To View The Project](#How%20To%20View%20The%20Project)
-* [How To Host The Project Locally](#How%20To%20Host%20The%20Project%20Locally)
+* [How To View The Project](#How-To-View-The-Project)
+* [How To Host The Project Locally](#How-To-Host-The-Project-Locally)
 
 
 ## About
