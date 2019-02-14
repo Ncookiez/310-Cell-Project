@@ -10,100 +10,125 @@
     <!-- Bootstrap 4.2.1 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
+		<style>
+			html,body{
+				height:100%;
+				margin-top:0px;
+				margin-bottom :0px;
+				margin-left:0px;
+				margin-right:0px;
+				background:#444444;
+			}
+			
+			input[type=button]{
+				padding: 5px;
+				border: 2px solid #B5D1E5;
+				border-radius: 5px;
+			}
+		</style>
   </head>
   <body>
+    <div class="title"><h1>Cell Bot P.1.0</h1></div>
+		<div id="conv" class="msgContainer" style="position:fixed; overflow:scroll; left:25%; width:50%; height:90%; background:#6F818E; box-shadow: 0px 0px 20px black;"></div>
+		<div style="position:fixed; bottom:0; margin-left:20%; margin-right:20%; padding:15px; text-align:center">
+			<input id="input" class="textBox" size="200" type="text">
+			<input id="submit" class="" type="button" value="Send">
+		</div>
+		<script src="javascripts/ChatTrie.js"></script>
+		<script type="text/javascript">
+			//Define Number.pad() function to add '0' padding to numbers for time formatting
+			Number.prototype.pad = function(size){
+				let str = String(this);
+				while(str.length < size) str = "0"+str;
+				return str;
+			};
+			
+			//Post inital greeting method:
+			let date = new Date();
+			document.getElementById("conv").innerHTML+="<div class='itsTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours<12? " AM":" PM")+"</div><div class='itsText'>CellBot loaded and ready to chat!</div>";
+			
+			//Define response functions when text is entered by the user:
+			var input = document.getElementById("input");
+			var submit = document.getElementById("submit");
+			
+			function generateResponse(){
+				let str = trie.search(input.value);
+				let date = new Date();
+				document.getElementById("conv").innerHTML+="<div class='yourTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours<12? " AM":" PM")+"</div><div class='yourText'>"+input.value+"</div>";
+				if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours<12? " AM":" PM")+"</div><div class='itsText'>"+str+"</div>";
+				input.value = "";
+			}
+			
+			input.onkeyup = function(event){
+				if(event.keyCode===13){
+					generateResponse();
+				}
+			};
+			
+			submit.onclick = function(){
+				generateResponse();
+			}
+			
+			//Definephrases for the ChatTrie creation:
+			var testPhrases = [
+				["Hello.","Hi!"],
+				["Bonjour.","Salut!"],
+				["Hi.","Hello!"],
+				["Salut.","Bonjour!"],
+				["Coucou","Salut!"],
+				["Allo","Bonjour"],
+				["What is your name?","Hmmm, I don't seem to have one... You can call me CellBot"+Math.floor(Math.random()*1000)],
+				["Comment tu t’appelles?","Hmmm, je crois que je n’ai pas de nom… Tu peux m’appeler RobotCell"+Math.floor(Math.random()*1000)],
+				["Are you a robot?","I hope not!"],
+				["Est ce que tu es un robot?","J’espère que non!"],
+				["Tu es un robot?","J’espère que non!"],
+				["How are you?","I'm doing well, thank you! How about yourself?"],
+				["Est ce que tu vas bien?","Je vais bien, merci! Comment tu vas?"],
+				["Ça va?","Ça va, merci! Et toi?"],
+				["I'm doing well.","That's good to hear!"],
+				["Ça va","Ça fait plaisir à entendre"],
+				["I'm not doing well","I'm sorry to hear that."],
+				["Je ne vais pas bien.","Je suis désolé d’entendre ça."],
+				["I'm doing badly.","That sucks. Want to talk about it?"],
+				["Je vais mal.","Oh non! Tu veux en parler?"],
+				["I'm doing pretty good.","That's nice."],
+				["Je vais bien.","Super!"],
+				["I'm doing pretty well.","That's nice."],
+				["Je vais plutot bien.","Super!"],
+				["Life sucks","Life is a roller coaster. It may be low now, but you'll be soaring near the clouds soon!"],
+				["La vie est null.","La vie c’est comme des montagnes russes. Tu es peut être tout en pas pour l’instant, mais tu seras bientôt dans les nuages."],
+				["Are you good at math?","Let me check... pi^2 = "+(Math.PI*Math.PI)+". Yeah I think I'm pretty good!"],
+				["Est ce que tu es fort en math?","Laisse moi voir… pi^2 = "+(Math.PI*Math.PI)+". Oui, je crois que je suis plutôt fort"],
+				["Can you see me?","I can't, but the NSA can."],
+				["Est que tu peux me voir?","Non, mais la NSA peut"],
+				["How old are you?","One second older than when you asked me."],
+				["Quel âge as tu?","Une seconde de plus que depuis que tu me l’as demandé"],
+				["Can you help me with my homework?","I don't think so, but I can help you get motivated to learn how to do your homework. You are one of a kind and I love you. You can do it!"],
+				["Est ce que tu peux m’aider à faire mes devoirs?","Je crois pas, mais je peux t’aider à trouver la motivation d’apprendre à faire tes devoirs. Tu es unique et je t’aime. Tu peux y arriver!"],
+				["Are you real?","Is this conversation real?"],
+				["Est ce que tu es réel?","Est ce que cette conversation est réel?"],
+				["Where are you?","In your computer of course! I promise I won't mess up too many files..."],
+				["Où es-tu?","Dans l'ordinateur bien sûr! Je te promets que je ne vais pas mettre de désordre dans trop de tes fichiers…"],
+				["How many fingers am I holding up?","Zero, you were just typing!"],
+				["J’ai combien de doigts levés?","Aucun, tu étais entrain de taper!"],
+				["Do you have a family?","I'm not sure. Maybe I'm the first?"],
+				["Est ce que tu as une famille?","Je ne suis pas sûr. Peut-être que je suis le premier?"],
+				["Can we play a game?","Sure! What do you want to play? I know how to play hangman and 20 questions."],
+				["On peut faire un jeu?","Biensûr! Tu veux jouer à quoi? Je connais le pendu"],
+				["Do you want to play a game?","That sounds like fun! What should we play? I know how to play hangman and 20 questions."],
+				["Est ce que tu veux jouer à un jeux?","Ça peut être drôle! Tu veux jouer à quoi? Je connais le pendu"],
+				["Let's play hangman.","%hangman"],
+				["Jouons au pendu.","%hangman"],
+				["Let's play 20 questions.","%20questions"],
+				["Jouons aux devinettes.","%20questios"]
 
-  	<!-- Navbar -->
-  	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  		<a class="navbar-brand" href="#">Navbar</a>
-  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    		<span class="navbar-toggler-icon"></span>
-  		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    		<ul class="navbar-nav mr-auto">
-      			<li class="nav-item active">
-        			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" href="#">Link</a>
-      			</li>
-      			<li class="nav-item dropdown">
-        			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        				Dropdown
-        			</a>
-        			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          				<a class="dropdown-item" href="#">Action</a>
-          				<a class="dropdown-item" href="#">Another action</a>
-          				<div class="dropdown-divider"></div>
-          				<a class="dropdown-item" href="#">Something else here</a>
-        			</div>
-      			</li>
-      			<li class="nav-item">
-        			<a class="nav-link disabled" href="#">Disabled</a>
-      			</li>
-    		</ul>
-    		<form class="form-inline my-2 my-lg-0">
-      			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    		</form>
-  		</div>
-	</nav>
-
-	<div class="container">
-    	<h1>TEST - Home Page</h1>
-      <div id="conv" style="height:90%; margin-left:25%; margin-right:25%; padding:30px; padding-bottom:100%; background:#6F818E; box-shadow: 0px 0px 20px black;"></div>
-    <div style="position:fixed; bottom:0; margin-left:25%; margin-right:25%; padding:15px;">
-      <input id="input" class="textBox" size="200" type="text">
-      <input id="submit" type="button" value="submit">
-    </div>
-    <script src="/javascripts/ChatTrie.js"></script>
-    <script type="text/javascript">
-      var input = document.getElementById("input");
-      var submit = document.getElementById("submit");
-      input.onkeyup = function(event){
-        if(event.keyCode===13){
-          let str = trie.search(input.value);
-          document.getElementById("conv").innerHTML+="<div class='yourText'>"+input.value+"</div>";
-          if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsText'>"+str+"</div>";
-          input.value = "";
-        }
-      };
-      
-      submit.onclick = function(){
-        let str = trie.search(input.value);
-        document.getElementById("conv").innerHTML+="<div class='yourText'>"+input.value+"</div>";
-        if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsText'>"+str+"</div>";
-        input.value = "";
-      }
-      
-      var testPhrases = [
-        ["Hello.","Hi!"],
-        ["Hi.","Hello!"],
-        ["What is your name?","Hmmm, I don't seem to have one... You can call me TextBot"+Math.floor(Math.random()*1000)],
-        ["Are you a robot?","I hope not!"],
-        ["How are you?","I'm doing well, thank you! How about yourself?"],
-        ["I'm doing well.","That's good to hear!"],
-        ["I'm not doing well","I'm sorry to hear that."],
-        ["I'm doing badly.","That sucks. Want to talk about it?"],
-        ["I'm doing pretty good.","That's nice."],
-        ["I'm doing pretty well.","That's nice."],
-        ["Life sucks","Life is a roller coaster. It may be low now, but you'll be soaring near the clouds soon!"],
-        ["Are you good at math?","Let me check... pi^2 = "+(Math.PI*Math.PI)+". Yeah I think I'm pretty good!"],
-        ["Can you see me?","I can't, but the NSA can."],
-        ["How old are you?","One second older than when you asked me."],
-        ["Can you help me with my homework?","I don't think so, but I can help you get motivated to learn how to do your homework. You are one of a kind and I love you. You can do it!"],
-        ["Are you real?","Is this conversation real?"],
-        ["Can we play a game?","Sure! What do you want to play? I know how to play hangman and 20 questions."],
-        ["Do you want to play a game?","That sounds like fun! What should we play? I know how to play hangman and 20 questions."],
-        ["Let's play hangman.","Ok! Shall we begin?%hangman"],
-        ["Let's play 20 questions.","Ok! Are you ready?%20questions"]
-        ];
-      var trie = new ChatTrie(testPhrases);
-      console.log(trie.toString());
-    </script>
-  </div>
-
+			];
+				
+			//Define ChatTrie:
+			var trie = new ChatTrie(testPhrases);
+			//Test if Trie is built:
+			console.log(trie.toString());
+		</script>
 	<!-- jQuery CDN -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 

@@ -8,6 +8,7 @@ function ChatTrie(data){
 	this.root = new TrieNode(null, null);
 	this.resp = data;//The aray of questions/phrases asked by the user and the responses that the bot knows. Passed as an (n*2) array of strings.
 	this.ignore = ['~','`','!','@','#','$','%','^','&','*','(',')','_','-','+','=','\\','|','}',']','{','[','?','.','>','<',',','\"','\'',':',';'];
+	this.replace = [['è','e'],['é','e'],['ê','e'],['ç','c'],['à','a'],['â','a'],['ô','o'],['ù','u'],['û','u']];
 	
 	//Returns the length of the matching word or part of a word and the list of what phrase/response tuples that it references
 	this.getRelevance = function(word){
@@ -34,10 +35,15 @@ function ChatTrie(data){
 	//Uses the this.getRelevance() function to return the response with the highest correlation to the phrase that was inputed
 	this.search = function(str){
 		var ignore = this.ignore;
+		var replace = this.replace;
 		let cleanStr = "";
 		for(let c = 0; c < str.length; c++){
 			if(!ignore.includes(str.charAt(c))){
-				cleanStr+=str.charAt(c).toLowerCase();
+				let char = str.charAt(c);
+				for(let i = 0; i < replace.length; i++){
+					if(replace[i][0]===char) char = replace[i][1]; //replace accented characters for simple searching.
+				}
+				cleanStr+=char.toLowerCase();
 			}
 		}
 		let words = cleanStr.split(" ");
@@ -91,12 +97,17 @@ function ChatTrie(data){
 	//builds the initial Trie based on the resp array at the top
 	this.build = function(){
 		for(let r = 0; r < this.resp.length; r++){
-			let phrase = this.resp[r][0];
+			var phrase = this.resp[r][0];
 			var ignore = this.ignore;
+			var replace = this.replace;
 			let cleanPhrase = "";
 			for(let c = 0; c < phrase.length; c++){
 				if(!ignore.includes(phrase.charAt(c))){
-					cleanPhrase+=phrase.charAt(c);
+					let char = phrase.charAt(c);
+					for(let i = 0; i < replace.length; i++){
+						if(replace[i][0]===char) char = replace[i][1]; //replace accented characters for simple searching.
+					}
+					cleanPhrase+=char.toLowerCase();
 				}
 			}
 			let words = cleanPhrase.split(" ");
