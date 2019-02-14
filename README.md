@@ -5,20 +5,20 @@ COSC 310 - Group 24
 
 ## Contents
 
-* [(1) About](#sub-heading-1)
-* [(2) How To View The Project](#sub-heading-2)
-* [(3) How To Host The Project Locally](#sub-heading-3)
+* [About](#About)
+* [How To View The Project](#How%20To%20View%20The%20Project)
+* [How To Host The Project Locally](#How%20To%20Host%20The%20Project%20Locally)
 
 
-## (1) About
+## About
 
 The **Conversational Environment for Learning Languages**, or **CELL** for short, is a chatbot that allows the user to converse and play different games in different languages. All features take place in a seamless and natural conversation that can be viewed on a desktop, laptop or mobile device.
 
-## (2) How To View The Project
+## How To View The Project
 
 The CELL Project is currently being hosted online, and can be viewed and utilized [here](#). <INSERT LINK>
 
-## (3) How To Host The Project Locally
+## How To Host The Project Locally
 
 Since CELL works off the Node.js framework, it can be easily hosted locally on your computer if you wish to do so.
 
