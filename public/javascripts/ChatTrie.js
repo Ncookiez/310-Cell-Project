@@ -8,6 +8,7 @@ function ChatTrie(data){
 	this.root = new TrieNode(null, null);
 	this.resp = data;//The aray of questions/phrases asked by the user and the responses that the bot knows. Passed as an (n*2) array of strings.
 	this.ignore = ['~','`','!','@','#','$','%','^','&','*','(',')','_','-','+','=','\\','|','}',']','{','[','?','.','>','<',',','\"','\'',':',';'];
+	this.endPunct = ['.','!','?'];
 	this.replace = [['è','e'],['é','e'],['ê','e'],['ç','c'],['à','a'],['â','a'],['ô','o'],['ù','u'],['û','u']];
 	
 	//Returns the length of the matching word or part of a word and the list of what phrase/response tuples that it references
@@ -36,6 +37,9 @@ function ChatTrie(data){
 	this.search = function(str){
 		var ignore = this.ignore;
 		var replace = this.replace;
+		var endPunct = this.endPunct;
+		let totalResponse = "";
+		let sentences = new Array(0);
 		let cleanStr = "";
 		for(let c = 0; c < str.length; c++){
 			if(!ignore.includes(str.charAt(c))){
@@ -44,29 +48,36 @@ function ChatTrie(data){
 					if(replace[i][0]===char) char = replace[i][1]; //replace accented characters for simple searching.
 				}
 				cleanStr+=char;
+			}else if(endPunct.includes(str.charAt(c))){//Check to see if the character is end punctuation
+				sentences.push(cleanStr); //Add the sentence to the array of sentences
+				cleanStr = ""; //Clear the temp sentence
 			}
 		}
-		let words = cleanStr.split(" ");
-		let count = new Array(this.resp.length);//Array to store the strength of the correlation of the phrase to the bot's known phrases
-		let max = 0;//store the max correlation;
-		let maxRef = -1;
-		for(let w = 0; w < words.length; w++){
-			let relv = this.getRelevance(words[w]);
-			let refs = relv.refs;
-			for(let r = 0; r < refs.length; r++){
-				if(count[refs[r]] === null || count[refs[r]] === undefined){
-					count[refs[r]] = 0;
-				}
-				count[refs[r]]+=(relv.len*relv.len);//Add the squared length of the match to the correlation count.
-				if(count[refs[r]] > max){
-					max = count[refs[r]];
-					maxRef = refs[r];
+		if(cleanStr.length > 0) sentences.push(cleanStr);//Push tghe remaining characters (incase the user didn't end with punctuation)
+		for(let i = 0; i < sentences.length; i++){
+			let words = sentences[i].split(" ");
+			let count = new Array(this.resp.length);//Array to store the strength of the correlation of the phrase to the bot's known phrases
+			let max = 0;//store the max correlation;
+			let maxRef = -1;
+			for(let w = 0; w < words.length; w++){
+				let relv = this.getRelevance(words[w]);
+				let refs = relv.refs;
+				for(let r = 0; r < refs.length; r++){
+					if(count[refs[r]] === null || count[refs[r]] === undefined){
+						count[refs[r]] = 0;
+					}
+					count[refs[r]]+=(relv.len*relv.len);//Add the squared length of the match to the correlation count.
+					if(count[refs[r]] > max){
+						max = count[refs[r]];
+						maxRef = refs[r];
+					}
 				}
 			}
+			let response = this.resp[maxRef][1];
+			let threshold = response.length*response.length / (sentences[i].length * (max+1));
+			if(max > threshold) totalResponse += response + " ";
 		}
-		let response = this.resp[maxRef][1];
-		let threshold = response.length*response.length / (str.length * (max+1));
-		if(max > threshold) return response;
+		if(totalResponse.length!=0) return totalResponse;
 		return null;
 	};
 	
