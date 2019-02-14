@@ -45,7 +45,7 @@
 			
 			//Post inital greeting method:
 			let date = new Date();
-			document.getElementById("conv").innerHTML+="<div class='itsTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours<12? " AM":" PM")+"</div><div class='itsText'>Hello! How are you?<br>Salut! Ça va?</div>";
+			document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>Hello! How are you?<br>Salut! Ça va?</div>";
 			
 			//Define response functions when text is entered by the user:
 			var input = document.getElementById("input");
@@ -54,8 +54,8 @@
 			function generateResponse(){
 				let str = trie.search(input.value);
 				let date = new Date();
-				document.getElementById("conv").innerHTML+="<div class='yourTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours<12? " AM":" PM")+"</div><div class='yourText'>"+input.value+"</div>";
-				if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours<12? " AM":" PM")+"</div><div class='itsText'>"+str+"</div>";
+				document.getElementById("conv").innerHTML+="<div class='yourTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+" - You</div><div class='yourText'>"+input.value+"</div>";
+				if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>"+str+"</div>";
 				input.value = "";
 			}
 			
