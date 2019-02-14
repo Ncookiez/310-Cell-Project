@@ -39,11 +39,11 @@ function ChatTrie(data){
 		let cleanStr = "";
 		for(let c = 0; c < str.length; c++){
 			if(!ignore.includes(str.charAt(c))){
-				let char = str.charAt(c);
+				let char = str.charAt(c).toLowerCase();
 				for(let i = 0; i < replace.length; i++){
 					if(replace[i][0]===char) char = replace[i][1]; //replace accented characters for simple searching.
 				}
-				cleanStr+=char.toLowerCase();
+				cleanStr+=char;
 			}
 		}
 		let words = cleanStr.split(" ");
@@ -74,7 +74,7 @@ function ChatTrie(data){
 	this.addWord = function(word, ref){
 		let node = this.root;
 		for(let c = 0; c < word.length; c++){
-			let char = word.charAt(c).toLowerCase();
+			let char = word.charAt(c);
 			let match = false;
 			for(let i = 0; i < node.chld.length; i++){
 				if(char == node.chld[i].char){
@@ -103,11 +103,11 @@ function ChatTrie(data){
 			let cleanPhrase = "";
 			for(let c = 0; c < phrase.length; c++){
 				if(!ignore.includes(phrase.charAt(c))){
-					let char = phrase.charAt(c);
+					let char = phrase.charAt(c).toLowerCase();
 					for(let i = 0; i < replace.length; i++){
 						if(replace[i][0]===char) char = replace[i][1]; //replace accented characters for simple searching.
 					}
-					cleanPhrase+=char.toLowerCase();
+					cleanPhrase+=char;
 				}
 			}
 			let words = cleanPhrase.split(" ");

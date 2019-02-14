@@ -59,3 +59,19 @@
 	color: #CCCCCC;
 	font-size: 12px;
 }
+
+#conv::-webkit-scrollbar-track
+{
+	
+}
+
+#conv::-webkit-scrollbar
+{
+	width:10px;
+}
+
+#conv::-webkit-scrollbar-thumb
+{
+	border-radius: 20px;
+	background-color: #444;
+}

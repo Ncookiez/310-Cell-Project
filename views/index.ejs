@@ -29,8 +29,8 @@
   </head>
   <body>
     <div class="title"><h1>Cell Bot P.1.0</h1></div>
-		<div id="conv" class="msgContainer" style="position:fixed; overflow:scroll; left:25%; width:50%; height:90%; background:#6F818E; box-shadow: 0px 0px 20px black;"></div>
-		<div style="position:fixed; bottom:0; margin-left:20%; margin-right:20%; padding:15px; text-align:center">
+		<div id="conv" class="msgContainer scrollbar" style="position:fixed; overflow:scroll; overflow-x:hidden; left:25%; width:50%; height:90%; background:#6F818E; box-shadow: 0px 0px 20px black;"></div>
+		<div style="position:fixed; bottom:0; margin-left:20%; margin-right:20%; padding:15px; text-align:center;">
 			<input id="input" class="textBox" size="200" type="text">
 			<input id="submit" class="" type="button" value="Send">
 		</div>
@@ -45,7 +45,7 @@
 			
 			//Post inital greeting method:
 			let date = new Date();
-			document.getElementById("conv").innerHTML+="<div class='itsTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours<12? " AM":" PM")+"</div><div class='itsText'>CellBot loaded and ready to chat!</div>";
+			document.getElementById("conv").innerHTML+="<div class='itsTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours<12? " AM":" PM")+"</div><div class='itsText'>Hello! How are you?<br>Salut! Ça va?</div>";
 			
 			//Define response functions when text is entered by the user:
 			var input = document.getElementById("input");
@@ -82,9 +82,9 @@
 				["Are you a robot?","I hope not!"],
 				["Est ce que tu es un robot?","J’espère que non!"],
 				["Tu es un robot?","J’espère que non!"],
-				["How are you?","I'm doing well, thank you! How about yourself?"],
-				["Est ce que tu vas bien?","Je vais bien, merci! Comment tu vas?"],
-				["Ça va?","Ça va, merci! Et toi?"],
+				["How are you?","I'm doing well, thank you!"],
+				["Est ce que tu vas bien?","Je vais bien, merci!"],
+				["Ça va?","Ça va, merci!"],
 				["I'm doing well.","That's good to hear!"],
 				["Ça va","Ça fait plaisir à entendre"],
 				["I'm not doing well","I'm sorry to hear that."],
