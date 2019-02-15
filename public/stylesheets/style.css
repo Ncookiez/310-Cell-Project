@@ -31,6 +31,7 @@ input[type=button] {
 }
 
 .yourText {
+	overflow-wrap: break-word;
 	width: 80%;
 	background: #B5D1E5;
 	padding: 7px;
@@ -40,6 +41,7 @@ input[type=button] {
 }
 
 .itsText {
+	overflow-wrap: break-word;
 	width: 80%;
 	background: #D1B5E5;
 	padding: 7px;
