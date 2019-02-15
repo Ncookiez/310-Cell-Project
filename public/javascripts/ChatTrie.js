@@ -22,6 +22,7 @@ function ChatTrie(data){
 			for(let i = 0; i < node.chld.length; i++){
 				if(char == node.chld[i].char){
 					refs = node.chld[i].refs;//store the current refs
+					if(c == word.length-1) refs.concat(refs);//Double the references to increase the correlation since this matches the whole word!
 					len = c+1;//store the current match length
 					node = node.chld[i];//Advance to the next node
 					match = true;
@@ -77,8 +78,9 @@ function ChatTrie(data){
 			}
 			if(maxRef > -1){
 				let response = this.resp[maxRef][1];
-				let threshold = response.length*response.length / (sentences[i].length * (max+1));
-				if(max > threshold) totalResponse += response + " ";
+				let threshold = (Math.pow(sentences[i].length, 2)+Math.pow(this.resp[maxRef][0].length, 2))/(max+1);
+				console.log("correlation: "+(max+1)+", threshold: "+threshold);
+				if(max+1 >= threshold) totalResponse += response + " ";
 			}
 		}
 		if(totalResponse.length!=0) return totalResponse;
@@ -106,6 +108,7 @@ function ChatTrie(data){
 				node.addChild(newNode);
 				node = newNode;
 			}
+			if(c == word.length-1) node.addRef(ref);//Add the reference twice if it is the end of the word (STRONGER CORRELATION!!)
 		}
 	};
 	

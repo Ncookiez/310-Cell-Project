@@ -95,7 +95,8 @@ var testPhrases = [
 	["Jouons aux devinettes.","%20questions"],
 	
 	//Adding separately so not to mix together with translated work
-	["I’m sad.","Oh no, I’m sorry to hear that."],
+	
+	["I’m sad.","Oh no, I’m sorry to hear that."], //NOT working
 	["I’m angry.","Don’t be angry, it’s a beautiful day!"],
 	["I’m okay.","That’s good to hear."],
 	["I’m tired.","You should get more sleep."],
@@ -114,9 +115,25 @@ var testPhrases = [
 	["When is","I don’t know. Check your watch!"], //default response to any question it doesn’t know
 	["Can you","Sadly, no."], //default response to any question it doesn’t know
 	["How many","Calculating… calculating… I don’t know."],
-	["Do you have a favorite animal?", "I enjoy pythons as long as they have white spaces on them"],
+	["Do you have a favourite animal?", "I enjoy pythons as long as they have white spaces on them"],
 	["Is there a monster under my bed?", "Is that where you put me when you aren’t talking to me? If so then probably."],
 	["Am I pretty?", "I turned off your webcam a long time ago. Does that answer your question?"],
+	["Do you have a name?","Hmmm, I don't seem to have one... You can call me CellBot"+Math.floor(Math.random()*1000)],
+	["Do you","Do you?"], //default statement
+	["Who is","Probably someone cool!"], //default statement
+	["Who is your","I’d rather keep that to myself."],
+	["I hate you"," :’( "],
+	["I love you"," <3 "],
+	["I like you"," I like you too! :D "],
+	["What is software engineering?","Software engineering is a step by step process to design, develop, test, and deploy a software system."],
+	["What is your favourite","I don’t have a preference."],
+	["What does _ mean?","%translateToEnglish"],
+	["Can you translate _ to English?","%translateToEnglish"],
+	["What is _ in English?","%translateToEnglish"],
+	["How do you say _ in French?","%translateToFrench"],
+	["Can you translate _ to French?","%translateToFrench"],
+	["What is _ in French?","%translateToFrench"],
+
 
 ];
 	
