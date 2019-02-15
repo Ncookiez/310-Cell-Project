@@ -18,13 +18,15 @@ window.onload = function(){
 }
 
 function generateResponse(){
-	let str = trie.search(input.value);
-	let date = new Date();
-	document.getElementById("conv").innerHTML+="<div class='yourTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+" - You</div><div class='yourText'>"+input.value+"</div>";
-	if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>"+str+"</div>";
-	input.value = "";
-	//Scroll to bottom of conversation:
-	document.getElementById("conv").lastChild.scrollIntoView();
+	if(input.value.length > 0){
+		let str = trie.search(input.value);
+		let date = new Date();
+		document.getElementById("conv").innerHTML+="<div class='yourTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+" - You</div><div class='yourText'>"+input.value+"</div>";
+		if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>"+str+"</div>";
+		input.value = "";
+		//Scroll to bottom of conversation:
+		document.getElementById("conv").lastChild.scrollIntoView();
+	}
 }
 
 input.onkeyup = function(event){
