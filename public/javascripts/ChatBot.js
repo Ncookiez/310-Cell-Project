@@ -5,13 +5,17 @@ Number.prototype.pad = function(size){
 	return str;
 };
 
-//Post inital greeting method:
-let date = new Date();
-document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>Hello! How are you?<br>Salut! Ça va?</div>";
-
 //Define response functions when text is entered by the user:
 var input = document.getElementById("input");
 var submit = document.getElementById("submit");
+
+window.onload = function(){
+	//Post inital greeting method:
+	let date = new Date();
+	document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>Hello! How are you?<br>Salut! Ça va?</div>";
+	//Focus the text input:
+	input.focus();
+}
 
 function generateResponse(){
 	let str = trie.search(input.value);
@@ -48,9 +52,9 @@ var testPhrases = [
 	["Tu es un robot?","J’espère que non!"],
 	["How are you?","I'm doing well, thank you!"],
 	["Est ce que tu vas bien?","Je vais bien, merci!"],
-	["Ça va?","Ça va, merci!"],
+	["Ça va?","Je vais bien, merci!"],
 	["I'm doing well.","That's good to hear!"],
-	["Ça va","Ça fait plaisir à entendre"],
+	["Je me sens bien","Ça fait plaisir à entendre"],
 	["I'm not doing well","I'm sorry to hear that."],
 	["Je ne vais pas bien.","Je suis désolé d’entendre ça."],
 	["I'm doing badly.","That sucks. Want to talk about it?"],
@@ -78,13 +82,39 @@ var testPhrases = [
 	["Do you have a family?","I'm not sure. Maybe I'm the first?"],
 	["Est ce que tu as une famille?","Je ne suis pas sûr. Peut-être que je suis le premier?"],
 	["Can we play a game?","Sure! What do you want to play? I know how to play hangman and 20 questions."],
-	["On peut faire un jeu?","Biensûr! Tu veux jouer à quoi? Je connais le pendu"],
+	["On peut faire un jeu?","Bien sûr! Tu veux jouer à quoi? Je connais le pendu"],
 	["Do you want to play a game?","That sounds like fun! What should we play? I know how to play hangman and 20 questions."],
 	["Est ce que tu veux jouer à un jeux?","Ça peut être drôle! Tu veux jouer à quoi? Je connais le pendu"],
+	
+	
 	["Let's play hangman.","%hangman"],
 	["Jouons au pendu.","%hangman"],
 	["Let's play 20 questions.","%20questions"],
-	["Jouons aux devinettes.","%20questios"]
+	["Jouons aux devinettes.","%20questions"],
+	
+	//Adding separately so not to mix together with translated work
+	["I’m sad.","Oh no, I’m sorry to hear that."],
+	["I’m angry.","Don’t be angry, it’s a beautiful day!"],
+	["I’m okay.","That’s good to hear."],
+	["I’m tired.","You should get more sleep."],
+	["Who are you?","You can call me CellBot"+Math.floor(Math.random()*1000)],
+	["Where am I?","Right in front of me!"],
+	["What is the meaning of life?","Hmm let me think… 42!"],
+	["Who is your favourite musician?","None, I don’t have ears."],
+	["Who is your favourite artist?","Cloudpainter, he uses computers like me!"],
+	["Can you sing?","Yes, but I only know Nickelback songs."],
+	["Can you dance?","No, and neither can you..."],
+	["Can you talk?","No. At least not to you."],
+	["Who shot first?","Han Solo. Obviously."],
+	["Do you know","Well, of course I do."], //default response to any question it doesn’t know
+	["What is the","I’m not sure. Sorry!"], //default response to any question it doesn’t know
+	["What is your","Why do you want to know?"], //default response to any question it doesn’t know
+	["When is","I don’t know. Check your watch!"], //default response to any question it doesn’t know
+	["Can you","Sadly, no."], //default response to any question it doesn’t know
+	["How many","Calculating… calculating… I don’t know."],
+	["Do you have a favorite animal?", "I enjoy pythons as long as they have white spaces on them"],
+	["Is there a monster under my bed?", "Is that where you put me when you aren’t talking to me? If so then probably."],
+	["Am I pretty?", "I turned off your webcam a long time ago. Does that answer your question?"],
 
 ];
 	

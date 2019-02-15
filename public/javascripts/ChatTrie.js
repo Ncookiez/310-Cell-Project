@@ -70,6 +70,8 @@ function ChatTrie(data){
 					if(count[refs[r]] > max){
 						max = count[refs[r]];
 						maxRef = refs[r];
+					}else if(count[refs[r]] == max && this.resp[maxRef][0].length > this.resp[count[refs[r]]][0].length){
+						maxRef = refs[r];//Make the maximum correlation sentence, the one with less words total in the reference sentence
 					}
 				}
 			}
