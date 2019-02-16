@@ -67,4 +67,4 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 
 ## Function Descriptions
 
-<TODO>
+* TODO
