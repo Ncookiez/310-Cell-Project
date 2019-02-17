@@ -3,29 +3,110 @@ Hangman.js handles all string checks and responses for the bot when hangman is b
 The HangmanGame Object stores all of the game data in a single object for easy cleaning.
 */
 
-var currentGame = null;
+//Variable to see if there is an active game
+var currentHMGame = null;
 
-function HangmanGame(){
-	this.words = [""];
-	this.selectedWord = this.words[Math.floor(Math.random()*this.words.length)];
+function HangmanGame(dictionary){
+	this.words = dictionary;
+	this.lang = Math.floor(Math.random()*2);
+	this.selectedWord = this.words[Math.floor(Math.random()*this.words.length)][this.lang];
 	this.tries = 6;//6 tries = 1 head, 1 body, 2 legs, 2 arms
 	this.guessedLetters = new Array(0);
+	this.replace = [['è','e'],['é','e'],['ê','e'],['ç','c'],['à','a'],['â','a'],['ô','o'],['ù','u'],['û','u']];
+	this.endGame = false;
 	
 	this.guessLetter = function(char){
 		//TODO: check if letter has already been guessed. If not, then add the letter to the guessedLetters array.
-		
-		return false;//returns false if already guessed.
-	}
+		char = char.toLowerCase();
+		for(let i = 0; i < this.replace.length; i++){
+			if(this.replace[i][0]===char) char = this.replace[i][1]; //replace accented characters for simple searching.
+		}
+		if(char.charAt(0) >= 'a' && char <= 'z'){
+			if(this.guessedLetters.includes(char)){
+				return "You have already guessed '"+char+"'. You have " + this.tries + " tries left.<br>" + this.getCurrent().str;
+			}else{
+				this.guessedLetters.push(char);
+				let current = this.getCurrent();
+				if(current.charLeft == 0){
+					this.endGame = true;
+					return "Congratulations! You got it!<br>" + current.str;
+				}
+				for(let i = 0; i < this.selectedWord.length; i++){
+					let c = this.selectedWord.charAt(i).toLowerCase();
+					for(let i = 0; i < this.replace.length; i++){
+						if(this.replace[i][0]===c) c = this.replace[i][1]; //replace accented characters for simple searching.
+					}
+					if(c == char) return "Good job! You have " + this.tries + " tries left.<br>" + current.str;
+				}
+				this.tries--;
+				if(this.tries == 0){
+					this.endGame = true;
+					return "You have no more tries. The word was '"+this.selectedWord+"'.";
+				}
+				return "There are no "+char+"\'s. You have " + this.tries + " tries left.<br>" + this.getCurrent().str;
+			}
+		}
+		return null; //Something went wrong...
+	};
 	
 	this.getCurrent = function(){
 		//TODO: returns the selected word with spaces in place of un-guessed letters. Example: "f_ck th_s sh_t".
-		
-		return null;
-	}
+		var str = "";
+		var charLeft = 0;
+		for(let i = 0; i < this.selectedWord.length; i++){
+			let char = this.selectedWord.charAt(i).toLowerCase();
+			for(let i = 0; i < this.replace.length; i++){
+				if(this.replace[i][0]===char) char = this.replace[i][1]; //replace accented characters for simple searching.
+			}
+			if(char==' ' || this.guessedLetters.includes(char)){
+				str+=this.selectedWord.charAt(i);//use original character with accents
+			}else{
+				str+='_ ';
+				charLeft++;
+			}
+		}
+		return {str:str, charLeft:charLeft};
+	};
+	
+	this.getInitialStatement = function(){
+		return "Ok, Let's play hangman! I'm thinking of " + (this.lang===0?"an English":"a French") + " word. You have " + this.tries + " tries left.<br>" + this.getCurrent().str + "<br>Guess a letter!";
+	};
+}
+
+function getGuessFromTemplate(str){
+	str = str.toLowerCase();
+	if(str.length == 1) return str.charAt(0);
+	//Template matching does not work:
+	/*
+	var templates = ["is there an ","is there a ","are there any "];
+	for(let n = 0; n < templates.length; n++){
+		for(let i = 0; i < str.length; i++){
+			for(j = i; j < str.length - templates[n].length - 1; j++){
+				let match = true;
+				for(let m = 0; m < templates[n].length; m++){
+					if(str.charAt(j) != templates[n].charAt(m)){
+						match = false;
+						break;
+					}
+				}
+				if(match) return str.charAt(j+1);
+			}
+		}
+	}*/
+	return null;
 }
 
 function getHangmanResponse(str){
-	if(currentGame == null) currentGame = new hangmanGame();
-	
-	return "This isn't implemented yet.";
+	if(equalStr(str.toString(),"%hangmanStart")) return currentHMGame.getInitialStatement();
+	else if(currentHMGame !== null && currentHMGame !== undefined){
+		let guess = getGuessFromTemplate(str);
+		if(guess !== null){
+			let response = currentHMGame.guessLetter(guess);
+			if(currentHMGame.endGame === true) currentHMGame = null;
+			return response;
+		}else{
+			return null;
+		}
+	}
+	return null;
 }

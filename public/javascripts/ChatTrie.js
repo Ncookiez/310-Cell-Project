@@ -57,12 +57,14 @@ function ChatTrie(data){
 		if(cleanStr.length > 0) sentences.push(cleanStr);//Push tghe remaining characters (incase the user didn't end with punctuation)
 		for(let i = 0; i < sentences.length; i++){
 			let words = sentences[i].split(" ");
+			let wordRefs = new Array(words.length);//store the references each word had to see if it was individually correlated later
 			let count = new Array(this.resp.length);//Array to store the strength of the correlation of the phrase to the bot's known phrases
 			let max = 0;//store the max correlation;
 			let maxRef = -1;
 			for(let w = 0; w < words.length; w++){
 				let relv = this.getRelevance(words[w]);
 				let refs = relv.refs;
+				wordRefs[w] = refs;
 				for(let r = 0; r < refs.length; r++){
 					if(count[refs[r]] === null || count[refs[r]] === undefined){
 						count[refs[r]] = 0;
@@ -80,11 +82,22 @@ function ChatTrie(data){
 				let response = this.resp[maxRef][1];
 				let threshold = (Math.pow(sentences[i].length, 2)+Math.pow(this.resp[maxRef][0].length, 2))/(max+1);
 				console.log("correlation: "+(max+1)+", threshold: "+threshold);
-				if(max+1 >= threshold) totalResponse += response + " ";
+				if(max+1 >= threshold){
+					if(response.charAt(0) == '%'){
+						let outliers = new Array(0);
+						for(let i = 0; i < wordRefs.length; i++){
+							if(!wordRefs[i].includes(maxRef)) outliers.push(words[i]);
+						}
+						console.log(outliers);
+						return{resp:response, out:outliers};
+					}else{
+						totalResponse += response + (i+1<sentences.length?" ":"");
+					}
+				}
 			}
 		}
-		if(totalResponse.length!=0) return totalResponse;
-		return null;
+		if(totalResponse.length!==0) return {resp:totalResponse, out:null};
+		return {resp:null, out:null};
 	};
 	
 	//Adds references to the phrase/response tuple on each node that is part of the given word

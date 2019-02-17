@@ -15,22 +15,78 @@ window.onload = function(){
 	document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>Hello! How are you?<br>Salut! Ça va?</div>";
 	//Focus the text input:
 	input.focus();
-}
+};
 
 function generateResponse(){
 	if(input.value.length > 0){
-		let str = trie.search(input.value);
-		//Check if hangman should be called instead to get a response:
-		if(str === "%hangman"){
-			str = gethangmanResponse(input.value);
+		var response = null;
+		let gameActive = currentHMGame!==null && currentHMGame!==undefined;
+		let gameResp = null;
+		if(gameActive && input.value.length == 1) gameResp = getHangmanResponse(input.value);
+		if(gameResp!==null){
+			response = gameResp;
+		}else{
+			search = trie.search(input.value);
+			response = search.resp;
+			let outliers = search.out;
+			//Check if hangman should be called to get a response:
+			if(!gameActive && equalStr(response, "%hangmanStart")){
+					currentHMGame = new HangmanGame(E2FDictionary);
+					response = getHangmanResponse("%hangmanStart");
+			}else if(equalStr(response, "%hangman")){
+				if(outliers.length > 0){
+					//Find the minimum length outlier (most likely a letter guess)
+					let min = outliers[0].length;
+					let minIdx = 0;
+					for(let i = 0; i < outliers.length; i++){
+						if(outliers[i].length < min){
+							min = outliers[i].length;
+							minIdx = i;
+						}
+					}
+					response = getHangmanResponse(outliers[minIdx].charAt(0)); // Assume that the first outlier from the outliers list is the guessed letter.
+				}else{
+					response = null;
+				}
+			}else if(equalStr(response, "%translate")){ //Check if translate should be called to get a response
+				
+				if(outliers.length > 0){
+					let translateStr = "";
+					for(let i = 0; i < outliers.length; i++){
+						translateStr += (outliers[i] + " ");
+					}
+					response = translatorTrie.search(translateStr).resp;
+					if(response !== null){
+						let translatedWord = translatorTrie.search(response).resp;
+						response = "'"+translatedWord+"' translates to '"+response+"'.";
+					}
+				}else{
+					response = null;
+				}
+			}
 		}
 		let date = new Date();
 		document.getElementById("conv").innerHTML+="<div class='yourTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+" - You</div><div class='yourText'>"+input.value+"</div>";
-		if(str !== null) document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>"+str+"</div>";
+		if(response !== null) document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>"+response+"</div>";
 		input.value = "";
 		//Scroll to bottom of conversation:
 		document.getElementById("conv").lastChild.scrollIntoView();
 	}
+}
+
+function equalStr(str1, str2){
+	if(str1===null || str2===null) return false;
+	if(str1.length!=str2.length){
+		//console.log("different sizes. Str1:"+str1.length+" Str2:"+str2.length);
+		return false;
+	}
+	for(let i = 0; i < str1.length; i++){
+		if(str1.charAt(i) != str2.charAt(i)){
+			//console.log("match false at "+i);
+			return false;
+		}
+	}
+	return true;
 }
 
 input.onkeyup = function(event){
@@ -41,7 +97,7 @@ input.onkeyup = function(event){
 
 submit.onclick = function(){
 	generateResponse();
-}
+};
 
 //Definephrases for the ChatTrie creation:
 var testPhrases = [
@@ -93,25 +149,37 @@ var testPhrases = [
 	["Est ce que tu veux jouer à un jeux?","Ça peut être drôle! Tu veux jouer à quoi? Je connais le pendu"],
 	
 	
-	["Let's play hangman.","%hangman"],
-	["Jouons au pendu.","%hangman"],
-	["Let's play 20 questions.","%20questions"],
-	["Jouons aux devinettes.","%20questions"],
+	["Let's play hangman.","%hangmanStart"],
+	["Jouons au pendu.","%hangmanStart"],
+	["Let's play 20 questions.","%20questionsStart"],
+	["Jouons aux devinettes.","%20questionsStart"],
 	
 	//Adding separately so not to mix together with translated work
 	
-	["I’m sad.","Oh no, I’m sorry to hear that."], //NOT working
+	["I’m sad.","Oh no, I’m sorry to hear that."],
+	["Je suis triste.","Oh non, je suis désolé d’entendre ça."],
 	["I’m angry.","Don’t be angry, it’s a beautiful day!"],
+	["Je suis en colère.","Ne sois pas en colère, c’est une belle journée!"],
 	["I’m okay.","That’s good to hear."],
+	
 	["I’m tired.","You should get more sleep."],
+	["Je suis fatigué.","Tu devrais dormir plus"],
 	["Who are you?","You can call me CellBot"+Math.floor(Math.random()*1000)],
+	["Qui est-tu?","Tu peux m’appeler RoboCell"+Math.floor(Math.random()*1000)],
 	["Where am I?","Right in front of me!"],
+	["Où suis-je?","Juste en face de moi!"],
 	["What is the meaning of life?","Hmm let me think… 42!"],
+	["Quel est le sens de la vie?","Hmm laisse moi réfléchir… 42!"],
 	["Who is your favourite musician?","None, I don’t have ears."],
+	["Quel est ton musicien préféré?","Auncun, je ne peux pas entendre."],
 	["Who is your favourite artist?","Cloudpainter, he uses computers like me!"],
+	["Quel est ton artiste préféré?","Cloudpainter, il utilise des ordinateurs comme moi!"],
 	["Can you sing?","Yes, but I only know Nickelback songs."],
+	["Est-ce que tu sais chanter?","Oui, mais je connais seulement Nickelback"],
 	["Can you dance?","No, and neither can you..."],
+	["Est-ce que tu sais danser?","Non, et toi non plus…"],
 	["Can you talk?","No. At least not to you."],
+	["Est ce que tu peux parler?","Non. Ou du moins pas à toi"],
 	["Who shot first?","Han Solo. Obviously."],
 	["Do you know","Well, of course I do."], //default response to any question it doesn’t know
 	["What is the","I’m not sure. Sorry!"], //default response to any question it doesn’t know
@@ -131,17 +199,111 @@ var testPhrases = [
 	["I like you"," I like you too! :D "],
 	["What is software engineering?","Software engineering is a step by step process to design, develop, test, and deploy a software system."],
 	["What is your favourite","I don’t have a preference."],
-	["What does _ mean?","%translateToEnglish"],
-	["Can you translate _ to English?","%translateToEnglish"],
-	["What is _ in English?","%translateToEnglish"],
-	["How do you say _ in French?","%translateToFrench"],
-	["Can you translate _ to French?","%translateToFrench"],
-	["What is _ in French?","%translateToFrench"],
-
+	["What does _ mean?","%translate"],
+	["translate _ English?","%translate"],
+	["What is _ in English?","%translate"],
+	["How do you say _ in English?","%translate"],
+	["How do you say _ in French?","%translate"],
+	["Comment dit-on _ in English?","%translate"],
+	["translate _ French?","%translate"],
+	["Peux-tu traduire _ en Anglais","%translate"],
+	["What is _ in French?","%translate"],
+	["Quel est le mot anglais pour _","%translate"],
+	
+	["Are there any","%hangman"],
+	["Is there a","%hangman"],
+	["Is there an","%hangman"],
+	["I will guess","%hangman"],
+	["Does it have any","%hangman"],
+	["What languages do you speak?","I speak English and French."],
 
 ];
+
+var E2FDictionary = [
+	["White",				"Blanc"],
+	["Brown",				"Marron"],
+	["Yellow",			"Jaune"],
+	["Pink",				"Rose"],
+	["Green",				"Vert"],
+	["Black",				"Noir"],
+	["Orange",			"Orange"],
+	["Red",					"Rouge"],
+	["Fly",					"Voler"],
+	["Jump",				"Sauter"],
+	["Swim",				"Nager"],
+	["Run",					"Courir"],
+	["Crawl",				"Ramper"],
+	["Feather",			"Plume"],
+	["Scales",			"Écailles"],
+	["Trunk",				"Trompe"],
+	["Beak",				"Bec"],
+	["Tail",				"Queue"],
+	["Horn",				"Corne"],
+	["Wool",				"Laine"],
+	["Hump",				"Bosse"],
+	["Fur",					"Fourrure"],
+	["Paws",				"Pattes"],
+	["None",				"Aucune"],
+	["Two",					"Deux"],
+	["Three",				"Trois"],
+	["Four",				"Quatre"],
+	["Small",				"Petit"],
+	["Big",					"Grand"],
+	["Long",				"Long"],
+	["Short",				"Court"],
+	["Primate",			"Primate"],
+	["Mammal",			"Mammifère"],
+	["Fish",				"Poisson"],
+	["Reptile",			"Reptile"],
+	["Bird",				"Oiseau"],
+	["Amphibians",	"Amphibien"],
+	["Bear",				"Ours"],
+	["Horse",				"Cheval"],
+	["Cat",					"Chat"],
+	["Dog",					"Chien"],
+	["Penguin",			"Penguin"],
+	["Pig",					"Cochon"],
+	["Cheetah",			"Guépard"],
+	["Kangaroo",		"Kangourou"],
+	["Tiger",				"Tigre"],
+	["Cow",					"Vache"],
+	["Chicken",			"Poulet"],
+	["Flamingo",		"Flamant Rose"],
+	["Elephant",		"Éléphant"],
+	["Wolf",				"Loup"],
+	["Hamster",			"Hamster"],
+	["Whale",				"Balaine"],
+	["Panda",				"Panda"],
+	["Frog",				"Grenouille"],
+	["Butterfly",		"Papillion"],
+	["Lion",				"Lion"],
+	["Giraffe",			"Girafe"],
+	["Monkey",			"Singe"],
+	["Zebra",				"Zèbre"],
+	["Savannah",		"Savane"],
+	["Ice Floe",		"Banquise"],
+	["Jungle",			"Jungle"],
+	["Forest",			"Forêt"],
+	["Wild",				"Sauvage"],
+	["Domesticated","Domestique"],
+	["Warm",				"Chaud"],
+	["Cold",				"Froid"],
+	["Water",				"Eau"],
+	["Animals",			"Animaux"],
+	["Animal",			"Animal"],
+	["Country",			"Pays"]
+];
+
+var F2EDictionary = new Array(E2FDictionary.length);
+for(let i = 0; i < E2FDictionary.length; i++){
+	F2EDictionary[i] = new Array(2);
+	F2EDictionary[i][0] = E2FDictionary[i][1];
+	F2EDictionary[i][1] = E2FDictionary[i][0];
+}
 	
 //Define ChatTrie:
 var trie = new ChatTrie(testPhrases);
 //Test if Trie is built:
 console.log(trie.toString());
+//Define tranlator Trie:
+var translatorTrie = new ChatTrie(E2FDictionary.concat(F2EDictionary));
