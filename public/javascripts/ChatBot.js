@@ -30,12 +30,19 @@ function generateResponse(){
 			response = search.resp;
 			let outliers = search.out;
 			//Check if hangman should be called to get a response:
-			if(equalStr(response, "%hangmanStart")){
+			if(equalStr(response, "%hangmanStartEnglish")){
 				if(!gameActive){
-					currentHMGame = new HangmanGame(E2FDictionary);
+					currentHMGame = new HangmanGame(E2FDictionary, 0);//Start with English language
 					response = getHangmanResponse("%hangmanStart");
 				}else{
 					response = "We are already playing Hangman!";
+				}
+			}else if(equalStr(response, "%hangmanStartFrench")){
+				if(!gameActive){
+					currentHMGame = new HangmanGame(E2FDictionary, 1);//Start with French language
+					response = getHangmanResponse("%hangmanStart");
+				}else{
+					response = "Nous sommes déjà entrain de jouer au pendu!";
 				}
 			}else if(equalStr(response, "%hangman")){
 				if(outliers.length > 0){
@@ -152,10 +159,10 @@ var testPhrases = [
 	["Do you want to play a game?","That sounds like fun! What should we play? I know how to play hangman and 20 questions."],
 	["Est ce que tu veux jouer à un jeux?","Ça peut être drôle! Tu veux jouer à quoi? Je connais le pendu"],
 	
-	["Let's play hangman.","%hangmanStart"],
-	["Jouons au pendu.","%hangmanStart"],
-	["Let's play 20 questions.","%20questionsStart"],
-	["Jouons aux devinettes.","%20questionsStart"],
+	["Let's play hangman.","%hangmanStartEnglish"],
+	["Jouons au pendu.","%hangmanStartFrench"],
+	["Let's play 20 questions.","%20questionsStartEnglish"],
+	["Jouons aux devinettes.","%20questionsStartFrench"],
 	
 	["I’m sad.","Oh no, I’m sorry to hear that."],
 	["Je suis triste.","Oh non, je suis désolé d’entendre ça."],

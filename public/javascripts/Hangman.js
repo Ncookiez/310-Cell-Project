@@ -1,4 +1,4 @@
-/*
+gith/*
 Hangman.js handles all string checks and responses for the bot when hangman is being played.
 The HangmanGame Object stores all of the game data in a single object for easy cleaning.
 */
@@ -24,27 +24,34 @@ function HangmanGame(dictionary, speakLang){
 		}
 		if(char.charAt(0) >= 'a' && char <= 'z'){
 			if(this.guessedLetters.includes(char)){
-				return "You have already guessed '"+char+"'. You have " + this.tries + " tries left.<br>" + this.getCurrent().str;
+				if(this.speakLang === 0) return "You have already guessed '"+char+"'. You have " + this.tries + " tries left.<br>" + this.getCurrent().str;
+				else return "Tu as déjà essayé la lettre'"+char+"'. Il te reste " + this.tries + "chances.<br>" + this.getCurrent().str;
 			}else{
 				this.guessedLetters.push(char);
 				let current = this.getCurrent();
-				if(current.charLeft == 0){
+				if(current.charLeft === 0){
 					this.endGame = true;
-					return "Congratulations! You got it!<br>" + current.str;
+					if(this.speakLang === 0) return "Congratulations! You got it!<br>" + current.str;
+					else return "Félicitation! Tu as trouver le bon mot!<br>" + current.str;
 				}
 				for(let i = 0; i < this.selectedWord.length; i++){
 					let c = this.selectedWord.charAt(i).toLowerCase();
 					for(let i = 0; i < this.replace.length; i++){
 						if(this.replace[i][0]===c) c = this.replace[i][1]; //replace accented characters for simple searching.
 					}
-					if(c == char) return "Good job! You have " + this.tries + " tries left.<br>" + current.str;
+					if(c == char){
+						if(this.speakLang === 0) return "Good job! You have " + this.tries + " tries left.<br>" + current.str;
+						else return "Bien joué! Il te reste " + this.tries + "chances.<br>" + current.str;
+					}
 				}
 				this.tries--;
-				if(this.tries == 0){
+				if(this.tries === 0){
 					this.endGame = true;
-					return "You have no more tries. The word was '"+this.selectedWord+"'.";
+					if(this.speakLang === 0) return "You have no more tries. The word was '"+this.selectedWord+"'.";
+					else return "Tu as utilisé toutes tes chances. Le mot était '"+this.selectedWord+"'.";
 				}
-				return "There are no "+char+"\'s. You have " + this.tries + " tries left.<br>" + this.getCurrent().str;
+				if(this.speakLang === 0) return "There are no "+char+"\'s. You have " + this.tries + " tries left.<br>" + this.getCurrent().str;
+				else return "Il n’y a pas de "+char+"\'s. Il te reste " + this.tries + " chances.<br>" + this.getCurrent().str;
 			}
 		}
 		return null; //Something went wrong...
@@ -70,7 +77,8 @@ function HangmanGame(dictionary, speakLang){
 	};
 	
 	this.getInitialStatement = function(){
-		return "Ok, Let's play hangman! I'm thinking of " + (this.lang===0?"an English":"a French") + " word. You have " + this.tries + " tries left.<br>" + this.getCurrent().str + "<br>Guess a letter!";
+		if(this.speakLang === 0) return "Ok, Let's play hangman! I'm thinking of " + (this.lang===0?"an English":"a French") + " word. You have " + this.tries + " tries left.<br>" + this.getCurrent().str + "<br>Guess a letter!";
+		else return "Ok, jouons au pendu! Je pense à mot "+ (this.lang===0?"Anglais":"Français")+". Il te reste " + this.tries + " chances.<br>" + this.getCurrent().str + "<br>Choisi une lettre!";
 	};
 	
 	this.getGuessFromString = function(str){
