@@ -8,7 +8,8 @@ COSC 310 - Group 24
 * [About](#About)
 * [How To View The Project](#How-To-View-The-Project)
 * [How To Host The Project Locally](#How-To-Host-The-Project-Locally)
-
+* [File Structure](#File-Structure)
+* [Function Descriptions](#Function-Descriptions)
 
 ## About
 
@@ -51,3 +52,19 @@ With that, the CELL project will be running solely for your machine on your loca
 ```
 127.0.0.1:3000
 ```
+
+## File Structure
+
+* **Views** - Includes all HTML files; the pages available on our site.
+* **Public > Stylesheets** - Includes all CSS files; the customization of our page's looks.
+* **Public > Javascripts** - Includes all JavaScript files; the functionality of our pages and bot.
+
+In **views**, we have 'index.ejs' that holds the homepage of our website, and the base for the bot to go on. We also have 'error.ejs' that loads in case the user enters a wrong url within our website.
+
+In **Public > Stylesheets**, we have 'style.css' which contains all the custom CSS we have used within our pages. We are also using Bootstrap CSS, with anything on our custom CSS file overriding it.
+
+In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main functionality and decision making of the CELL bot. We also have 'ChatTrie.js' which includes the Trie structure in which all predicted inputs and outputs are stored (more details on this structure can be found in the function descriptions section). Finally, 'Hangman.js' includes the functionality in order to allow the bot to play a game of hangman with the user.
+
+## Function Descriptions
+
+* TODO
