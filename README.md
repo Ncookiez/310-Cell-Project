@@ -17,7 +17,7 @@ The **Conversational Environment for Learning Languages**, or **CELL** for short
 
 ## How To View The Project
 
-The CELL Project is currently being hosted online, and can be viewed and utilized [here](#). <INSERT LINK>
+The CELL Project is currently being hosted online, and can be viewed and utilized [here](https://mighty-inlet-33381.herokuapp.com/).
 
 ## How To Host The Project Locally
 
@@ -67,4 +67,23 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 
 ## Function Descriptions
 
-* TODO
+* **ChatTrie.js**
+  * chatTrie(data) - X
+    * getRelevance(word) - X
+    * search(str) - X
+    * addWord(word, ref) - X
+    * build() - X
+  * trieNode() - X
+
+* **ChatBot.js**
+  * onload() - X
+  * generateResponse() - X
+  * equalStr(str1, str2) - X
+
+* **Hangman.js**
+  * hangmanGame(dictionary, speakLang) - X
+    * guessLetter(char) - X
+    * getCurrent() - X
+    * getInitialStatement() - X
+    * getGuessFromString(str) - X
+  * getHangmanResponse(str) - X
