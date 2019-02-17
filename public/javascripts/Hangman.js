@@ -6,12 +6,13 @@ The HangmanGame Object stores all of the game data in a single object for easy c
 //Variable to see if there is an active game
 var currentHMGame = null;
 
-function HangmanGame(dictionary){
+function HangmanGame(dictionary, speakLang){
+	this.speakLang = speakLang;
 	this.words = dictionary;
 	this.lang = Math.floor(Math.random()*2);
 	this.selectedWord = this.words[Math.floor(Math.random()*this.words.length)][this.lang];
-	this.tries = 6;//6 tries = 1 head, 1 body, 2 legs, 2 arms
 	this.guessedLetters = new Array(0);
+	this.tries = 6;//6 tries = 1 head, 1 body, 2 legs, 2 arms
 	this.replace = [['è','e'],['é','e'],['ê','e'],['ç','c'],['à','a'],['â','a'],['ô','o'],['ù','u'],['û','u']];
 	this.endGame = false;
 	
@@ -71,35 +72,23 @@ function HangmanGame(dictionary){
 	this.getInitialStatement = function(){
 		return "Ok, Let's play hangman! I'm thinking of " + (this.lang===0?"an English":"a French") + " word. You have " + this.tries + " tries left.<br>" + this.getCurrent().str + "<br>Guess a letter!";
 	};
-}
-
-function getGuessFromTemplate(str){
-	str = str.toLowerCase();
-	if(str.length == 1) return str.charAt(0);
-	//Template matching does not work:
-	/*
-	var templates = ["is there an ","is there a ","are there any "];
-	for(let n = 0; n < templates.length; n++){
+	
+	this.getGuessFromString = function(str){
+		str = str.toLowerCase();
+		cleanStr = "";
 		for(let i = 0; i < str.length; i++){
-			for(j = i; j < str.length - templates[n].length - 1; j++){
-				let match = true;
-				for(let m = 0; m < templates[n].length; m++){
-					if(str.charAt(j) != templates[n].charAt(m)){
-						match = false;
-						break;
-					}
-				}
-				if(match) return str.charAt(j+1);
-			}
+			let char = str.charAt(i);
+			if(char >= 'a' && char <= 'z') cleanStr+=char;
 		}
-	}*/
-	return null;
+		if(cleanStr.length == 1) return cleanStr.charAt(0);
+		return null;
+	};
 }
 
 function getHangmanResponse(str){
 	if(equalStr(str.toString(),"%hangmanStart")) return currentHMGame.getInitialStatement();
 	else if(currentHMGame !== null && currentHMGame !== undefined){
-		let guess = getGuessFromTemplate(str);
+		let guess = currentHMGame.getGuessFromString(str);
 		if(guess !== null){
 			let response = currentHMGame.guessLetter(guess);
 			if(currentHMGame.endGame === true) currentHMGame = null;

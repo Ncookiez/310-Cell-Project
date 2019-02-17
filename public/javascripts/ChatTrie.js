@@ -65,16 +65,19 @@ function ChatTrie(data){
 				let relv = this.getRelevance(words[w]);
 				let refs = relv.refs;
 				wordRefs[w] = refs;
-				for(let r = 0; r < refs.length; r++){
-					if(count[refs[r]] === null || count[refs[r]] === undefined){
-						count[refs[r]] = 0;
-					}
-					count[refs[r]]+=(relv.len*relv.len);//Add the squared length of the match to the correlation count.
-					if(count[refs[r]] > max){
-						max = count[refs[r]];
-						maxRef = refs[r];
-					}else if(count[refs[r]] == max && this.resp[maxRef][0].length > this.resp[refs[r]][0].length){
-						maxRef = refs[r];//Make the maximum correlation sentence, the one with less words total in the reference sentence
+				//Only count the correlation of the word if it is longer than one character (this is mainly for hangman)
+				if(words[w].length > 1){
+					for(let r = 0; r < refs.length; r++){
+						if(count[refs[r]] === null || count[refs[r]] === undefined){
+							count[refs[r]] = 0;
+						}
+						count[refs[r]]+=(relv.len*relv.len);//Add the squared length of the match to the correlation count.
+						if(count[refs[r]] > max){
+							max = count[refs[r]];
+							maxRef = refs[r];
+						}else if(count[refs[r]] == max && this.resp[maxRef][0].length > this.resp[refs[r]][0].length){
+							maxRef = refs[r];//Make the maximum correlation sentence, the one with less words total in the reference sentence
+						}
 					}
 				}
 			}
@@ -86,7 +89,7 @@ function ChatTrie(data){
 					if(response.charAt(0) == '%'){
 						let outliers = new Array(0);
 						for(let i = 0; i < wordRefs.length; i++){
-							if(!wordRefs[i].includes(maxRef)) outliers.push(words[i]);
+							if(!wordRefs[i].includes(maxRef) || words[i].length==1) outliers.push(words[i]);
 						}
 						console.log(outliers);
 						return{resp:response, out:outliers};

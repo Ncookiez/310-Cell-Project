@@ -22,7 +22,7 @@ function generateResponse(){
 		var response = null;
 		let gameActive = currentHMGame!==null && currentHMGame!==undefined;
 		let gameResp = null;
-		if(gameActive && input.value.length == 1) gameResp = getHangmanResponse(input.value);
+		if(gameActive) gameResp = getHangmanResponse(input.value);
 		if(gameResp!==null){
 			response = gameResp;
 		}else{
@@ -30,16 +30,20 @@ function generateResponse(){
 			response = search.resp;
 			let outliers = search.out;
 			//Check if hangman should be called to get a response:
-			if(!gameActive && equalStr(response, "%hangmanStart")){
+			if(equalStr(response, "%hangmanStart")){
+				if(!gameActive){
 					currentHMGame = new HangmanGame(E2FDictionary);
 					response = getHangmanResponse("%hangmanStart");
+				}else{
+					response = "We are already playing Hangman!";
+				}
 			}else if(equalStr(response, "%hangman")){
 				if(outliers.length > 0){
-					//Find the minimum length outlier (most likely a letter guess)
+					//Find the last minimum length outlier (most likely a letter guess)
 					let min = outliers[0].length;
 					let minIdx = 0;
 					for(let i = 0; i < outliers.length; i++){
-						if(outliers[i].length < min){
+						if(outliers[i].length <= min){//<= is used to find the last minimum letter word or character (most likely the guess)
 							min = outliers[i].length;
 							minIdx = i;
 						}
@@ -148,20 +152,16 @@ var testPhrases = [
 	["Do you want to play a game?","That sounds like fun! What should we play? I know how to play hangman and 20 questions."],
 	["Est ce que tu veux jouer à un jeux?","Ça peut être drôle! Tu veux jouer à quoi? Je connais le pendu"],
 	
-	
 	["Let's play hangman.","%hangmanStart"],
 	["Jouons au pendu.","%hangmanStart"],
 	["Let's play 20 questions.","%20questionsStart"],
 	["Jouons aux devinettes.","%20questionsStart"],
-	
-	//Adding separately so not to mix together with translated work
 	
 	["I’m sad.","Oh no, I’m sorry to hear that."],
 	["Je suis triste.","Oh non, je suis désolé d’entendre ça."],
 	["I’m angry.","Don’t be angry, it’s a beautiful day!"],
 	["Je suis en colère.","Ne sois pas en colère, c’est une belle journée!"],
 	["I’m okay.","That’s good to hear."],
-	
 	["I’m tired.","You should get more sleep."],
 	["Je suis fatigué.","Tu devrais dormir plus"],
 	["Who are you?","You can call me CellBot"+Math.floor(Math.random()*1000)],
@@ -181,41 +181,71 @@ var testPhrases = [
 	["Can you talk?","No. At least not to you."],
 	["Est ce que tu peux parler?","Non. Ou du moins pas à toi"],
 	["Who shot first?","Han Solo. Obviously."],
+	["Qui as tiré en premier?","Han Solo. Bien sûr."],
 	["Do you know","Well, of course I do."], //default response to any question it doesn’t know
+	["Est-ce que tu connais","Bien sûr."],
 	["What is the","I’m not sure. Sorry!"], //default response to any question it doesn’t know
+	["Qu’est ce que le","Je ne suis pas sûr. Désolé!"],
 	["What is your","Why do you want to know?"], //default response to any question it doesn’t know
+	["Quel est ton","Pourquoi est que tu veux que je le sache?"],
 	["When is","I don’t know. Check your watch!"], //default response to any question it doesn’t know
+	["Quand est-ce que","Je ne sais pas. Regarde ta montre!"],
 	["Can you","Sadly, no."], //default response to any question it doesn’t know
+	["Peux-tu","Malheureusement, non."],
 	["How many","Calculating… calculating… I don’t know."],
+	["Combien","Calculation… calculation… Je ne sais pas."],
 	["Do you have a favourite animal?", "I enjoy pythons as long as they have white spaces on them"],
+	["Est-ce que tu as un animal préféré?","J’aime les pythons mais seulement ceux qui sont correctement espacé"],
 	["Is there a monster under my bed?", "Is that where you put me when you aren’t talking to me? If so then probably."],
+	["Y a-t-il un monstre sous mon lit?","C’est là que tu me mets quand tu n’es pas entrain de me parler?"],
 	["Am I pretty?", "I turned off your webcam a long time ago. Does that answer your question?"],
+	["Je suis beau?","J’ai éteins ta webcam il y a longtemp. Est-ce-que ça répond à ta question?"],
 	["Do you have a name?","Hmmm, I don't seem to have one... You can call me CellBot"+Math.floor(Math.random()*1000)],
+	["Est-ce que tu as un nom?","Hmmm je n’ai pas l’air d’en avoir un… Tu peux m’appeler RoboCell"+Math.floor(Math.random()*1000)],
 	["Do you","Do you?"], //default statement
+	["Est-ce-que","Est-ce-que?"],
 	["Who is","Probably someone cool!"], //default statement
+	["Qui est","Probablement quelqu'un de cool!"],
 	["Who is your","I’d rather keep that to myself."],
+	["Qui est ton?","Je préfèrerai garder ça pour moi."],
 	["I hate you"," :’( "],
+	["Je te déteste",":’( "],
 	["I love you"," <3 "],
+	["Je t’aime"," <3 "],
 	["I like you"," I like you too! :D "],
+	["Je t’aime bien","Moi aussi je t’aime bien! :D "],
 	["What is software engineering?","Software engineering is a step by step process to design, develop, test, and deploy a software system."],
+	["Qu’est-ce-que l'ingénierie informatique?","L'ingénierie informatique c’est une série d'étapes pour concevoir, développer, tester et déployer un logiciel informatique."],
 	["What is your favourite","I don’t have a preference."],
+	["Quel est ton préféré","Je n’ai pas de préférence."],
 	["What does _ mean?","%translate"],
+	["Qu’est-ce-que _ veut dire?","%translate"],
 	["translate _ English?","%translate"],
+	["traduit _ en Anglais","%translate"],
 	["What is _ in English?","%translate"],
+	["Qu'est ce que _ en Anglais?","%translate"],
 	["How do you say _ in English?","%translate"],
+	["Comment dit-ton _ en Anglais?","%translate"],
 	["How do you say _ in French?","%translate"],
-	["Comment dit-on _ in English?","%translate"],
+	["Comment dit-ton _ en Anglais?","%translate"],
 	["translate _ French?","%translate"],
-	["Peux-tu traduire _ en Anglais","%translate"],
+	["traduit _ en Français.","%translate"],
+	["Can you translate _ in French.","%translate"],
+	["Peux-tu traduire _ en Français","%translate"],
 	["What is _ in French?","%translate"],
-	["Quel est le mot anglais pour _","%translate"],
+	["Quel est le mot français pour _","%translate"],
 	
 	["Are there any","%hangman"],
+	["Y-a t-il un", "%hangman"],
 	["Is there a","%hangman"],
+	["Est-ce qu’il y a un","%hangman"],
 	["Is there an","%hangman"],
 	["I will guess","%hangman"],
+	["Je pense","%hangman"],
 	["Does it have any","%hangman"],
+	["As-t-il un","%hangman"],
 	["What languages do you speak?","I speak English and French."],
+	["Quelles langues parles-tu?","Je parle Français et Anglais."],
 
 ];
 
