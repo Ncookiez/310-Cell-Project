@@ -76,14 +76,14 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   * trieNode() - X
 
 * **ChatBot.js**
-  * onload() - X
-  * generateResponse() - X
-  * equalStr(str1, str2) - X
+  * onload() - Contains some actions to complete when the page first loads. This includes getting the current time, posting an initial message from the bot to the user, and placing the user's cursor on the text input automatically.
+  * generateResponse() - This is the main function to acquire an appropriate response from the bot. It searches the trie structure in order to do so. This method also checks if the acquired response is a command to start a game or initialize a translation.
+  * equalStr(str1, str2) - Checks if a string is the same as another. Checks for null strings and then for equal length for optimization purposes.
 
 * **Hangman.js**
-  * hangmanGame(dictionary, speakLang) - X
-    * guessLetter(char) - X
-    * getCurrent() - X
-    * getInitialStatement() - X
-    * getGuessFromString(str) - X
-  * getHangmanResponse(str) - X
+  * hangmanGame(dictionary, speakLang) - This function contains the main functionality of the hangman game. It collects all required variables for a game to begin and contains the following four functions:
+    * guessLetter(char) - Keeps track of guesses as well as if the letter guessed by the user is correct or wrong. It also has statetements in case the user runs out of guesses or successfully finishes the game.
+    * getCurrent() - Returns the word to the user with un-guessed letters hidden. This is so that the user can keep track of what they have guessed correctly, the length of the word, and so on.
+    * getInitialStatement() - Contains the initial statement once a game of hangman is started.
+    * getGuessFromString(str) - This functions extracts the letter guessed by the user from their input.
+  * getHangmanResponse(str) - This function makes use of the functions above in order to start the game, and calls the appropriate functions throughout the game.
