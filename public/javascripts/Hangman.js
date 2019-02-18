@@ -41,7 +41,7 @@ function HangmanGame(dictionary, speakLang){
 					}
 					if(c == char){
 						if(this.speakLang === 0) return "Good job! You have " + this.tries + " tries left.<br>" + current.str;
-						else return "Bien joué! Il te reste " + this.tries + "chances.<br>" + current.str;
+						else return "Bien joué! Il te reste " + this.tries + " chances.<br>" + current.str;
 					}
 				}
 				this.tries--;
