@@ -68,12 +68,12 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 ## Function Descriptions
 
 * **ChatTrie.js**
-  * chatTrie(data) - X
-    * getRelevance(word) - X
-    * search(str) - X
-    * addWord(word, ref) - X
-    * build() - X
-  * trieNode() - X
+  * chatTrie(data) - This function takes the user data entered into the chatbot and checks it for similarities in the trie data structure. Each word from the question/statement is checked by searching through the trie for a matching relevance for each word, the relevance is measured through by a number value. The maximum value question is kept track of and once the search is done the relevant answer is returned to the chatbot as a response to the user question.
+    * getRelevance(word) - The function takes each word from the user response and returns the length of the matching word and the list of phrases/responses associated to that word. This function also works with partial matches for words as well.
+    * search(str) - This function takes the users full response and searches the trie to determine the match with the greatest correlation by using the getRelevance() function. The returned value is the response with the highest correlation value when compared to the users response.
+    * addWord(word, ref) - This function takes a word when building the trie and adds a reference to it on each node that it is a part of. If there is no match then a new node is created for the trie.
+    * build() - The function that builds the initial trie from an existing array of questions/phrases asked by the user with correlating responses that the bot knows. The function will also replace words with accents on them to make it easier to work with later on.
+  * trieNode() - This creates a new node in the trie.
 
 * **ChatBot.js**
   * onload() - Contains some actions to complete when the page first loads. This includes getting the current time, posting an initial message from the bot to the user, and placing the user's cursor on the text input automatically.
