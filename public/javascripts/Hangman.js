@@ -1,4 +1,4 @@
-gith/*
+/*
 Hangman.js handles all string checks and responses for the bot when hangman is being played.
 The HangmanGame Object stores all of the game data in a single object for easy cleaning.
 */
