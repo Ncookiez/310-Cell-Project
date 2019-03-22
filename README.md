@@ -3,6 +3,8 @@ COSC 310 - Group 24
 
 **Authors:** Everton S. - Trevor R. - Joshua H. - Noah C. - Eloise E.
 
+*This branch was further developed by Noah Cukiert.*
+
 ## Contents
 
 * [About](#About)
