@@ -298,8 +298,9 @@ var testPhrases = [
 	["Je pense","%hangman"],
 	["Does it have any","%hangman"],
 	["As-t-il un","%hangman"],
-	["What languages do you speak?","I speak English and French."],
+	["What languages do you speak?","I speak English, French and Portuguese."],
 	["Quelles langues parles-tu?","Je parle Français et Anglais."],
+	["Que línguas você fala?","Eu falo inglês, françes e português."],
 
 ];
 
