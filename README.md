@@ -107,3 +107,14 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 **DFD Level 1**
 
 ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_1.png?raw=true)
+
+**Examples of Features**
+
+* **Spell Check**
+
+  ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Spellcheck_Image.png?raw=true)
+  
+* **Additional Responses**
+
+  ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Additional_Responses_Image.png?raw=true)
+  
