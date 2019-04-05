@@ -96,9 +96,9 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
    * Implemented a feature that can handle when the user enters small giberish phrases or letters that do not form words.
    
 **Feature Descriptions**
-  * GUI - the graphical user interface designed for our system provides a colorful and enjoyable experience to match the light-hearted nature of our chatbot. The GUI allows users to view all previous messages sent and responses from the chatbot as well.
-  * Additional Responses - In the list of understood sentences for the trie data structure there are certain "starter sentences" that will be used if the chatbot doesn't understand the users input. This means that the for most question formats our chatbot will have a response that fits the asked question.
-  * Spell Check - The way the trie data structure works allows for simple spelling errors, what this means is that because the trie structure looks for the strongest correlation of words possible it can handle words with slight errors as the correlation will still be moderately high. 
+  * GUI - the graphical user interface designed for our system provides a colorful and enjoyable experience to match the light-hearted nature of our chatbot. The GUI allows users to view all previous messages sent and responses from the chatbot as well. **This feature was implemented in A2**
+  * Additional Responses - In the list of understood sentences for the trie data structure there are certain "starter sentences" that will be used if the chatbot doesn't understand the users input. This means that the for most question formats our chatbot will have a response that fits the asked question. **This feature was implemented in A2**
+  * Spell Check - The way the trie data structure works allows for simple spelling errors, what this means is that because the trie structure looks for the strongest correlation of words possible it can handle words with slight errors as the correlation will still be moderately high. **This feature was implemented in A2**
 
 **Examples of Features**
 
