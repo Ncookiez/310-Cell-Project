@@ -118,7 +118,18 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/DFD1.PNG?raw=true)
 
 * **Feature Demonstration**
-  * //TODO
+
+  * Conversation & Language Demo
+  
+    ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/ConvExample1.PNG?raw=true)
+    
+  * Hangman Game Demo
+  
+    ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/ConvExample2.PNG?raw=true)
+    
+  * Handling Spelling Mistakes Demo
+  
+    ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/ConvExample3.PNG?raw=true)
 
 * **Current Limitations**
   * //TODO list + 2 fail examples
