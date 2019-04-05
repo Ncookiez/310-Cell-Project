@@ -110,9 +110,11 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
     * Not implemented.
   
 * **Level 0 Data Flow Diagram**
+
   ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/DFD0.PNG?raw=true)
   
 * **Level 1 Data Flow Diagram**
+
   ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/DFD1.PNG?raw=true)
 
 * **Feature Demonstration**
