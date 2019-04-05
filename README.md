@@ -12,6 +12,7 @@ COSC 310 - Group 24
 * [How To Host The Project Locally](#How-To-Host-The-Project-Locally)
 * [File Structure](#File-Structure)
 * [Function Descriptions](#Function-Descriptions)
+* [Assignment #3 Further Development](#Assignment-#3---Further-Development)
 
 ## About
 
@@ -19,7 +20,7 @@ The **Conversational Environment for Learning Languages**, or **CELL** for short
 
 ## How To View The Project
 
-The CELL Project is currently being hosted online, and can be viewed and utilized [here](https://mighty-inlet-33381.herokuapp.com/).
+The CELL Project is currently being hosted online, and can be viewed and utilized [here](https://mighty-inlet-33381.herokuapp.com/) (_link is not updated for the latest individual assignment_).
 
 ## How To Host The Project Locally
 
@@ -89,3 +90,26 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
     * getInitialStatement() - Contains the initial statement once a game of hangman is started.
     * getGuessFromString(str) - This functions extracts the letter guessed by the user from their input.
   * getHangmanResponse(str) - This function makes use of the functions above in order to start the game, and calls the appropriate functions throughout the game.
+
+## Assignment #3 - Further Development
+
+* **Features Added**
+  * //TODO feature + explanation + example
+  
+* **Level 0 Data Flow Diagram**
+  * //TODO dfd + description
+  
+* **Level 1 Data Flow Diagram**
+  * //TODO dfd + description
+
+* **Feature Demonstration**
+  * //TODO
+
+* **Current Limitations**
+  * //TODO list + 2 fail examples
+
+* **Possible Exportable Features**
+  * //TODO 5 features that could be made into API
+
+* **Video Presentation**
+  * //TODO 60-90s introduction + added features + DFD descriptions
