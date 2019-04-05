@@ -1,3 +1,4 @@
+##### All recent changes are by Joshua Henderson #####
 # CELL Project
 COSC 310 - Group 24
 
