@@ -1,4 +1,4 @@
-# CELL Project
+# ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/CELL_logo_large.png?raw=true) CELL Project
 COSC 310 - Group 24
 
 **Authors:** Everton S. - Trevor R. - Joshua H. - Noah C. - Eloise E.
