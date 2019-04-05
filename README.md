@@ -118,3 +118,6 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 
 ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_1.png?raw=true)
   
+**Sample Output**
+
+![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_1.png?raw=true)
