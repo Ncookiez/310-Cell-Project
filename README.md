@@ -94,7 +94,20 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 ## Assignment #3 - Further Development
 
 * **Features Added**
-  * //TODO feature + explanation + example
+  * Simple GUI
+    * A fully browser-integrated GUI was implemented since version 1.0. No changes were necessary at this stage.
+  * Extra Topic
+    * Since our chatbot is not topic-based, it can respond to any coherent statement. No topic changes were made at this stage.
+  * Extra Language
+    * Our chatbot is, however, language-based in terms of its capabilities. In version 1.0, CELL was able to comprehend and respond to statements in English and French. In the current version, CELL can now comprehend and respond to statements in English, French and Portuguese. To accomplish this, our entire database of statements and responses was translated manually in order to create a coherent and proficient conversation in the extra language.
+  * Responses Outside Topics
+    * Since version 1.0, unless the user types something completely incomprehensible, any statement receives an appropriate response. No changes were necessary at this stage.
+  * Handling Spelling Mistakes
+    * Since version 1.0, our trie structure finds similarities between user statements to understandable statements, meaning no addition of a spell-checker or anything similar was needed.
+  * Language Toolkits
+    * Not implemented.
+  * Agent-to-Agent Communication
+    * Not implemented.
   
 * **Level 0 Data Flow Diagram**
   * //TODO dfd + description
