@@ -125,3 +125,11 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_2.png?raw=true)
 
 ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_3.png?raw=true)
+
+**System Limitations**
+
+* **No Correlation**
+  Our chatbot was designed to handle almost any kind of input given by the user, however, there are instances where the chatbot will output no response. This is because the trie looks to see what parts of the users input most correlate to parts of the statements in the trie structure. We have designed our system to have simple statements with standard question style openers ("Do you know", "Can you", etc) where if the beginning correlates but not the ending then it will send a response back that will give a non-direct response if the full question is not known. We could not take into account every input from the user so certain phrases will return no response because the trie cannot find any correlation to any part of the sentence.
+  
+* **Incorrect Correlation**
+  As stated before our system is correlation based, this can pose potential problems when a user enters two strings that are the same but may have slightly different syntax to them. This means that the system can output two different reponses to statements that are similar in content but possibly use different words or incorrect grammar. Therefore the system is only as accurate as the sentences that are created for it. 
