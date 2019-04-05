@@ -118,7 +118,6 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/DFD1.PNG?raw=true)
 
 * **Feature Demonstration**
-
   * Conversation & Language Demo
   
     ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/ConvExample1.PNG?raw=true)
@@ -137,9 +136,9 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   * The bot does not recognize dramatic spelling mistakes; only minor ones.
   * The bot does not currently store information about the user, only about its own immediate functionality.
   
-  * Example of severely misspelled sentences not getting a response from the bot:
+  Example of severely misspelled sentences not getting a response from the bot:
   
-    ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/FailExample.PNG?raw=true)
+  ![](https://github.com/Ncookiez/310-Cell-Project/blob/NC/public/images/FailExample.PNG?raw=true)
 
 * **Possible Exportable Features**
   * The Trie structure utilized to create the statement-response mechanism from our bot could be easily exported in an API form. Another development team could easily import such structure and build it using whatever dictionary of statements and responses they desire.
