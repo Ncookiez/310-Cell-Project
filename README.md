@@ -12,7 +12,7 @@ COSC 310 - Group 24
 * [How To Host The Project Locally](#How-To-Host-The-Project-Locally)
 * [File Structure](#File-Structure)
 * [Function Descriptions](#Function-Descriptions)
-* [Assignment #3 Further Development](#Assignment-#3---Further-Development)
+* [Assignment #3 Further Development](#Assignment-3---Further-Development)
 
 ## About
 
