@@ -89,9 +89,9 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
     * getGuessFromString(str) - This functions extracts the letter guessed by the user from their input.
   * getHangmanResponse(str) - This function makes use of the functions above in order to start the game, and calls the appropriate functions throughout the game.
   
-  ## Assignment 3 
+## Assignment 3 
   
- **Implemented Features**
+**Implemented Features**
    * Implemented a feature that can handle when the user enters small giberish phrases or letters that do not form words.
    
 **Feature Descriptions**
