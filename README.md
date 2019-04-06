@@ -18,7 +18,7 @@ The **Conversational Environment for Learning Languages**, or **CELL** for short
 
 ## How To View The Project
 
-The CELL Project is currently being hosted online, and can be viewed and utilized [here](https://mighty-inlet-33381.herokuapp.com/).
+The OLD VERSION of the CELL Project is currently being hosted online, and can be viewed and utilized ~~[here]~~.
 
 ## How To Host The Project Locally
 
