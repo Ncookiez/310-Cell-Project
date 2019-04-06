@@ -3,6 +3,9 @@
   <head>
 
     <title>Cell Bot</title>
+    
+    <!-- font-awesome css for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap 4.2.1 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -12,14 +15,24 @@
     
     <!-- Custom ICON -->
     <link rel='icon' type='image/ico' href='images/cell_logo_icon.ico'>
+    
+    <div id="voices">
+	    <!-- Text to Speech API french female script-->
+	    <script src="//code.responsivevoice.org/responsivevoice.js?key=L2VvYB5m"></script>
+    </div>
+    
+    <!-- Thesaurus API holder -->
+    <div id="thesaurus" style="display: none;">
+    	
+    </div>
 
   </head>
   <body>
 
-  	<!-- Bot Title, Version & Description -->
-  	<div class="title">
-  	<img src='images/CELL_logo_large.png' height='128px' width='128px'/><br><br>
-		<h1>Cell Bot V.1.0</h1>
+	<!-- Bot Title, Version & Description -->
+	<div id="title">
+		<img src='images/CELL_logo_large.png' height='128px' width='128px'/><br><br>
+		<h1>Cell Bot V.TR.1.0</h1>
 		<div id="info">
 			<p>
 				<br>
@@ -37,15 +50,22 @@
 		</div>
 	</div>
 	
-	<!-- ChatBot Container -->
-	<div id="conv" class="msgContainer">
-		<!-- Empty Div -->
-	</div>
-
-	<!-- User Input & Submit Button -->
-	<div id="inputs">
-		<input id="input" class="textBox" size="200" type="text">
-		<input id="submit" class="" type="button" value="Send">
+	<div id="main-content">
+		<!-- ChatBot Container -->
+		<div id="conv" class="msgContainer">
+			<!-- Empty Div -->
+		</div>
+	
+		<!-- User Input & Submit Button -->
+		<div id="inputs">
+			<button id="voiceRec" onclick="recognition.start(); this.style='color:red'; setTimeout(resetVoiceRec,5000);">Voice <i class="fa fa-microphone"></i></button>
+			<input id="input" class="textBox" size="200" type="text">
+			<input id="submit" class="" type="button" value="Send"><br>
+			<div style="width: 100%; text-align: center; color: white">
+				Narration and Speech Recognition Language:
+				<input id="toggleVoice" class="" type="button" value="Français">
+			</div>
+		</div>
 	</div>
 
 	<!-- Importing Trie Strucure JS -->
@@ -56,6 +76,12 @@
 	
 	<!-- Importing Hangman JS -->
 	<script src="javascripts/Hangman.js"></script>
+	
+	<!-- Importing Voice Load JS -->
+	<script src="javascripts/VoiceLoad.js"></script>
+	
+	<!-- Importing Voice Recognition Load JS -->
+	<script src="javascripts/VoiceRecLoad.js"></script>
 
   </body>
 </html>

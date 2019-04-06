@@ -15,6 +15,10 @@ window.onload = function(){
 	document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>Hello! How are you?<br>Salut! Ça va?</div>";
 	//Focus the text input:
 	input.focus();
+	//Create voice API functionality:
+	loadVoice();
+	//Load voice recognition functionality:
+	loadVoiceRec();
 };
 
 function generateResponse(){
@@ -78,7 +82,11 @@ function generateResponse(){
 		}
 		let date = new Date();
 		document.getElementById("conv").innerHTML+="<div class='yourTime'>"+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+" - You</div><div class='yourText'>"+input.value+"</div>";
-		if(response !== null) document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>"+response+"</div>";
+		if(response !== null){
+			document.getElementById("conv").innerHTML+="<div class='itsTime'>CellBot - "+(date.getHours()%13 + Math.floor(date.getHours()/13)) +":"+date.getMinutes().pad(2)+(date.getHours()<12? " AM":" PM")+"</div><div class='itsText'>"+response+"</div>";
+			//Make the bot say its response
+			speak(response);
+		}
 		input.value = "";
 		//Scroll to bottom of conversation:
 		document.getElementById("conv").lastChild.scrollIntoView();

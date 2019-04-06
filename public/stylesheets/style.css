@@ -1,9 +1,14 @@
-html,body {
+html {
 	height: 100%;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-right: 0;
+	background: #444444;
+}
+
+body {
+	display: inline;
 	background: #444444;
 }
 
@@ -13,10 +18,16 @@ input[type=button] {
 	border-radius: 5px;
 }
 
+button{
+	padding: 5px;
+	border: 2px solid #B5D1E5;
+	border-radius: 5px;
+}
+
 .msgContainer {
 	margin-top: 15px;
-	margin-left: 0%;
-	margin-right: 0%;
+	margin-left: 0;
+	margin-right: 0;
 	padding: 30px;
 	border-radius: 10px;
 }
@@ -51,16 +62,6 @@ input[type=button] {
 	border-radius: 10px;
 }
 
-.title {
-	position: fixed;
-	padding: 30px;
-	margin-right: 75%;
-	color: #D1B5E5;
-	text-shadow: 3px 3px 3px black;
-	top: 0;
-	left: 0;
-}
-
 .yourTime {
 	width: 100%;
 	text-align: left;
@@ -91,22 +92,21 @@ input[type=button] {
 }
 
 #conv {
-	position: fixed;
 	overflow: scroll;
 	overflow-x: hidden;
-	left: 25%;
-	width: 50%;
-	height: 90%;
+	height: 88%;
 	background: #6F818E;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0 0 20px black;
+}
+
+#main-content{
+	display: inline-block;
+	width: 50%;
+	height: 100%;
 }
 
 #inputs {
-	position: fixed;
-	bottom: 0;
-	margin-left: 20%;
-	margin-right: 20%;
-	padding: 15px;
+	padding: 10px;
 	text-align: center;
 }
 
@@ -121,4 +121,31 @@ input[type=button] {
 	text-align: justify;
 	text-shadow: none;
 	margin-right:20%;
+}
+
+#title {
+	display: inline-block;
+	vertical-align: top;
+	width: 25%;
+	padding: 30px;
+	color: #D1B5E5;
+	text-shadow: 3px 3px 3px black;
+}
+
+#voices{
+	display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  #title{
+  	display: inline-block;
+  	width: 100%;
+  }
+  
+  #main-content{
+  	display: inline-block;
+  	margin-left: 8%;
+  	margin-right: 8%;
+  	width: 84%;
+  }
 }
