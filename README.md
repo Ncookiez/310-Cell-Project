@@ -155,3 +155,7 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 **Exportable Features**
   * Data Structure - The best part about our chatbot is the trie data structure, it is extremely versitle and efficient for the uses of this project. The trie does suffer from time complexity issues when attempting to remove information from the trie but that is not our concern with this project.
   * Hangman game - While the hangman game is only really compatable with the data structure the core functionality is still available for use in this case. 
+  
+**Video Presentation**
+
+* The video demonstrating the project can be found using the [link](https://youtu.be/G02tCksoF1k).
