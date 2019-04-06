@@ -119,7 +119,7 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 
 **DFD Level 1**
 
-![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_1_redo.png?raw=true)
+![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Level_1_DFD_redo2.png?raw=true)
 
 * For the level 1 DFD the process is now broken down to decide whether or not the user is asking a simple question or making a statement, or wanting to play a game. If the user wants to play a game the input is sent to the Hangman process to check the users input. Afterwards the data is sent back to the process that sends the response to the GUI to display for the user. 
   
