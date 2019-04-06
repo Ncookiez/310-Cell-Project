@@ -10,6 +10,7 @@ COSC 310 - Group 24
 * [How To Host The Project Locally](#How-To-Host-The-Project-Locally)
 * [File Structure](#File-Structure)
 * [Function Descriptions](#Function-Descriptions)
+* [Feature Implementations](#Feature-Implementations)
 
 ## About
 
@@ -97,3 +98,25 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   * loadVoiceRec() - Function that is called by ChatBot.js when the window loads. This sets up the speech input button and the voice recognition object.
   * setRecLang(lang) - Sets the current language that should be detected
   * resetVoiceRec() - Resets the color of the speech input button after a timeout
+
+## Feature-Implementations
+* **Features that were already implemented**
+  * Spelling mistake handler - The bot uses a trie to find word correlation to responses so if a word is slightly mispelled, then part of the word will still match and the correct response will still be generated.
+    * Example - Input: "whut is yur nam?"
+    * Output: "Hmmm, I don't seem to have one... You can call me CellBot287"
+  * Phrase recognition - The bot splits input by sentences and processes them all.
+    * Example - Input: "Hello. How are you? How old are you?"
+    * Output: "Hi! I'm doing well, thank you! One second older than when you asked me."
+  * UI - The bot is developed with html, js, and css. We designed it to have a UI from the beginning.
+  
+* **New Features**
+* Since so many features had already been implemented, I decided to get creative on the accessibility of the bot and improve the user experience in a way that compliments its purpose as a language teacher.
+  * Speech-to-Text input - If the user is using Chrome as their browser and has a microphone, they can now click the voice button next to the input box and speak to the bot in English or French. This uses chrome's SpeechRecognition webkit and the implementation can be found in VoiceRecLoad.js.
+    * Exmaple is in video
+  * Text-to-Speech output - If the user has an audio output device recognised by their browser, they can choose the option for Cell Bot to say it's responses outloud in either english or french by toggling the language button at the bottom of the page. This feature uses the ResponsiveVoice.JS API which takes text as an input and plays generated audio out from the page. The implementation of this feature can be found on VoiceLoad.js.
+    * Example is in video
+  * Synonym recognition - The bot will now evaluate every english word it knows and add its synonyms to its vocabulary by using the synonyms module from the node.js library. This helps the bot understand a variety of users, since every person formulates sentences differently.
+    * Example - input 1: "Are you a robot?"
+    * Output 1: "I hope not!"
+    * Input 2: "Are you automated?"
+    * Output 2: "I hope not!"
