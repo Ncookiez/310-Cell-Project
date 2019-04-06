@@ -96,6 +96,11 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
    * I implemented an additional topic for the user to communicate to the chatbot with. The topic that I chose was music, the chatbot is able to respond to the users statements about favorite songs or bands and an instrument that the user may play. The chatbot can also answer simple music theory related questions (eg. What is a time signature?) to continue with the idea that we designed our chatbot to be a program that could help a user learn another language, in this case it is musical language. 
    * The functionality is obviously limited due to the fact that it would be difficult for the system to interpret actual sheet music or musical notes, but given enough time the system could be provided with more functionality to potentially allow this. These improvements are only available in English right now, there was not enough time to translate The statements to another language. 
    
+   * **Example Output**
+   
+   ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/A3_New_Features.png?raw=true)
+   
+   
 **Feature Descriptions**
   * GUI - the graphical user interface designed for our system provides a colorful and enjoyable experience to match the light-hearted nature of our chatbot. The GUI allows users to view all previous messages sent and responses from the chatbot as well. **This feature was implemented in A2**
   * Additional Responses - In the list of understood sentences for the trie data structure there are certain responses that are considered default responses that will be used if the chatbot doesn't understand the users input. The default responses have a similar opening structure to most commonly phrased questions but are not specific to any particular question. This means that for most question formats our chatbot will have a response that fits the asked question but may not answer the specific question. **This feature was implemented in A2**
