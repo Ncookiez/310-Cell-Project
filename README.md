@@ -1,4 +1,4 @@
-# CELL Project
+# CELL Project: Trevor Richard
 COSC 310 - Group 24
 
 **Authors:** Everton S. - Trevor R. - Joshua H. - Noah C. - Eloise E.
@@ -91,7 +91,7 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   
 * **VoiceLoad.js**
   * loadVoice() - Function that is called by ChatBot.js when the window loads. This sets up the language toggle button.
-  * speal(phrase) - Function that is used to speak any string that is given to it with the currently selected language (English or French).
+  * speak(phrase) - Function that is used to speak any string that is given to it with the currently selected language (English or French).
   
 * **VoiceRecLoad.js**
   * loadVoiceRec() - Function that is called by ChatBot.js when the window loads. This sets up the speech input button and the voice recognition object.
