@@ -253,6 +253,28 @@ var testPhrases = [
 	["As-t-il un","%hangman"],
 	["What languages do you speak?","I speak English and French."],
 	["Quelles langues parles-tu?","Je parle Français et Anglais."],
+	
+	["Do you know anything about music?", "I know a little, what music do you like?"],
+	["Do you like?", "Yes I enjoy what ever music I can listen to, the internet is full of songs. What do you like?"],
+	["Can you play an instrument?", "No, but I can use morse code. Do play an instrument?"],
+	["I like to listen to", "Nice! Do you have a favorite song?"],
+	["My favorite song is", "That's awesome! I'll have to give it a listen song time."],
+	["Do you know the song", "Probably not, I don't get much time to listen to music."],
+	["I can play guitar", "That's cool! What type of music do you play?"],
+	["I can play bass","Slappa da bass man!"],
+	["I can play drums"," That's cool! Just as long as there is enough cowbell!"],
+	["I can play","That's awesome!"],
+	["I like to sing","I do too. Except you can't hear it when I do it."],
+	["My favorite band is","My favorite is Nickelback. Mostly because I only know how to sing their songs. What song by them is your favorite?"],
+	["What is 4/4 time signature?","It is the common time signature that most songs are performed in. It consists of four beats per measure with the strength being Strong-weak-medium-weak"],
+	["What is a time signature?","A time signature is a way for telling how the music is to be counted."],
+	["What is a key signature?","It is the key in which a song is composed in. The key, in most cases, dictates whether a note is sharp, flat, or natural."],
+	["What tempo should I play my song at?","All tempos are good. Maybe try " + +Math.floor(Math.random()*1000)],
+	["I want to learn to play","I believe in you!"],
+	["What is music?","I just know it as a bunch of zeroes and ones but it's probably more than that."],
+	["What is tempo?","The tempo of a song is the speed at which it is played in. It is measured in beats per minute."],
+	["What song should I learn to play?","All Star by Smash Mouth"],
+	["",""],
 
 ];
 
