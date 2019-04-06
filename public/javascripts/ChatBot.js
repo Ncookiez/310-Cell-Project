@@ -19,6 +19,8 @@ window.onload = function(){
 	loadVoice();
 	//Load voice recognition functionality:
 	loadVoiceRec();
+	//Test synonyms library
+	console.log(synonyms("trip"));
 };
 
 function generateResponse(){

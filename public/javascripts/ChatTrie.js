@@ -104,7 +104,7 @@ function ChatTrie(data){
 	};
 	
 	//Adds references to the phrase/response tuple on each node that is part of the given word
-	this.addWord = function(word, ref){
+	this.addWord = function(word, ref, iter){
 		let node = this.root;
 		for(let c = 0; c < word.length; c++){
 			let char = word.charAt(c);
@@ -126,7 +126,22 @@ function ChatTrie(data){
 			}
 			if(c == word.length-1) node.addRef(ref);//Add the reference twice if it is the end of the word (STRONGER CORRELATION!!)
 		}
+		if(!iter) this.addSyns(word, ref);
 	};
+	
+	//Adds the synonyms of the desired word
+	this.addSyns = function(word, ref){
+		syns = synonyms(word);
+			if(syns!==undefined){
+			synlist = [];
+			if(syns.n !== undefined) synlist.push(syns.n);//add nouns
+			if(syns.v !== undefined) synlist.push(syns.v);//add verbs
+			if(syns.s !== undefined) synlist.push(syns.s);//add other
+			for(let i = 0; i < synlist.length; i++){
+				for(let j = 0; j < synlist[i].length; j++) this.addWord(synlist[i][j], ref, true);
+			}
+		}
+	}
 	
 	//builds the initial Trie based on the resp array at the top
 	this.build = function(){
