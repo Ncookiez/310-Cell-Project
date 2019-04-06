@@ -144,4 +144,4 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   * The Trie structure utilized to create the statement-response mechanism from our bot could be easily exported in an API form, and contains the main functionality of our bot. Another development team could easily import such structure and build it using whatever dictionary of statements and responses they desire. The structure created from such code also integrates all handling of spelling mistakes. A description of the structure's methods and functionality can be found [here](#Function-Descriptions).
 
 * **Video Presentation**
-  //TODO 60-90s introduction + added features + DFD descriptions
+  * The video may be viewed on YouTube, [here](https://www.youtube.com/watch?v=T2AG_2wXpk8).
