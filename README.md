@@ -115,9 +115,13 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 
 ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_0_redo.png?raw=true)
 
+* For the level 0 DFD the main process is the ChatBot itself, the process is finding the response with the highest correlation from our data field, the CELL Bot Dictionary, and returns the response that matches the correlation value. The response is then sent to the next process which sends it to the GUI to be displayed to the user.  
+
 **DFD Level 1**
 
 ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_1_redo.png?raw=true)
+
+* For the level 1 DFD the process is now broken down to decide whether or not the user is asking a simple question or making a statement, or wanting to play a game. If the user wants to play a game the input is sent to the Hangman process to check the users input. Afterwards the data is sent back to the process that sends the response to the GUI to display for the user. 
   
 **Sample Output**
 
