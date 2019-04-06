@@ -105,6 +105,8 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   * GUI - the graphical user interface designed for our system provides a colorful and enjoyable experience to match the light-hearted nature of our chatbot. The GUI allows users to view all previous messages sent and responses from the chatbot as well. **This feature was implemented in A2**
   * Additional Responses - In the list of understood sentences for the trie data structure there are certain responses that are considered default responses that will be used if the chatbot doesn't understand the users input. The default responses have a similar opening structure to most commonly phrased questions but are not specific to any particular question. This means that for most question formats our chatbot will have a response that fits the asked question but may not answer the specific question. **This feature was implemented in A2**
   * Spell Check - The way the trie data structure works allows for simple spelling errors, what this means is that because the trie structure looks for the strongest correlation of words possible it can handle words with slight errors as the correlation will still be moderately high. **This feature was implemented in A2**
+  * Language Toolkits - There were no additional language toolkits implemented for our project.
+  * Chatbot Conversation - This was not a feature that we implemented for our chatbot.
 
 **Examples of Features**
 
@@ -114,27 +116,27 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   
 * **Additional Responses**
 
-  ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Additional_Responses_Image.png?raw=true)
+ ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Additional_Responses_Image.png?raw=true)
   
 **DFD Level 0**
 
-![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_0_redo.png?raw=true)
+ ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_0_redo.png?raw=true)
 
 * For the level 0 DFD the main process is the ChatBot itself, the process is finding the response with the highest correlation from our data field, the CELL Bot Dictionary, and returns the response that matches the correlation value. The response is then sent to the next process which sends it to the GUI to be displayed to the user.  
 
 **DFD Level 1**
 
-![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Level_1_DFD_redo2.png?raw=true)
+ ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Level_1_DFD_redo2.png?raw=true)
 
 * For the level 1 DFD the process is now broken down to decide whether or not the user is asking a simple question or making a statement, or wanting to play a game. If the user wants to play a game the input is sent to the Hangman process to check the users input. Afterwards the data is sent back to the process that sends the response to the GUI to display for the user. 
   
 **Sample Output**
 
-![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_1.png?raw=true)
+ ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_1.png?raw=true)
 
-![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_2.png?raw=true)
+ ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_2.png?raw=true)
 
-![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_3.png?raw=true)
+ ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Output_3.png?raw=true)
 
 **System Limitations**
 
