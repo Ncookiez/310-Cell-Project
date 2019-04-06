@@ -38,5 +38,5 @@ function setRecLang(lang){
 }
 
 function resetVoiceRec(){
-	document.getElementById("voiceRec").style = "color: black;";
+	setTimeout(function(){document.getElementById("voiceRec").style = "color: black;";}, 5000);
 }

@@ -33,7 +33,7 @@
 				<br>
 				Cell Bot is an interactive pen pal that you can chat with in English or French. Cell Bot also knows how to play hangman! If you don't know what a word means, try asking it to translate it for you. Have fun!<br><br>
 				<p>
-					This is version 1.0 of Cell Bot, released on 17/2/2019 in association with the University of British Columbia. Credit to the creation of Cell Bot goes to:<br><br>
+					This is version TR-1.0 of Cell Bot, released on 5/4/2019 in association with the University of British Columbia. Credit to the creation of Cell Bot goes to:<br><br>
 					Eloïse E.<br>
 					Everton S.<br>
 					Josh H.<br>
@@ -53,7 +53,7 @@
 	
 		<!-- User Input & Submit Button -->
 		<div id="inputs">
-			<button id="voiceRec" onclick="recognition.start(); this.style='color:red'; setTimeout(resetVoiceRec,5000);">Voice <i class="fa fa-microphone"></i></button>
+			<button id="voiceRec" onclick="recognition.start(); this.style='color:red'; resetVoiceRec();">Voice <i class="fa fa-microphone"></i></button>
 			<input id="input" class="textBox" size="200" type="text">
 			<input id="submit" class="" type="button" value="Send"><br>
 			<div style="width: 100%; text-align: center; color: white">
