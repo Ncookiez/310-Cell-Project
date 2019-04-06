@@ -113,11 +113,11 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   
 **DFD Level 0**
 
-![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_0.png?raw=true)
+![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_0_redo.png?raw=true)
 
 **DFD Level 1**
 
-![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_1.png?raw=true)
+![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/DFD_Level_1_redo.png?raw=true)
   
 **Sample Output**
 
