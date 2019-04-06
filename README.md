@@ -63,7 +63,7 @@ In **views**, we have 'index.ejs' that holds the homepage of our website, and th
 
 In **Public > Stylesheets**, we have 'style.css' which contains all the custom CSS we have used within our pages. We are also using Bootstrap CSS, with anything on our custom CSS file overriding it.
 
-In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main functionality and decision making of the CELL bot. We also have 'ChatTrie.js' which includes the Trie structure in which all predicted inputs and outputs are stored (more details on this structure can be found in the function descriptions section). Finally, 'Hangman.js' includes the functionality in order to allow the bot to play a game of hangman with the user.
+In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main functionality and decision making of the CELL bot. We also have 'ChatTrie.js' which includes the Trie structure in which all predicted inputs and outputs are stored (more details on this structure can be found in the function descriptions section). 'Hangman.js' includes the functionality in order to allow the bot to play a game of hangman with the user. 'VoiceLoad.js' contains the functions required to load the text-to-speech functionality using the ResponsiveVoice.JS API https://responsivevoice.org/. 'VoiceRecLoad.js' contains the functions required to load the speech-to-text functionality by using the chrome speech recognition library.
 
 ## Function Descriptions
 
@@ -71,7 +71,8 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
   * chatTrie(data) - This function takes the user data entered into the chatbot and checks it for similarities in the trie data structure. Each word from each question/statement is checked by searching through the trie for a matching relevance for each word, the relevance is measured through by a number value. The maximum value question is kept track of and once the search is done the relevant answer is returned to the chatbot as a response to the user question.
     * getRelevance(word) - The function takes each word from the user response and returns the length of the matching word and the array of references to the phrases/responses associated to that word. This function also works with partial matches for words as well.
     * search(str) - This function takes the users full response and searches the trie to determine the match with the greatest correlation by using the getRelevance() function. The returned value is the response with the highest correlation value that meets the treshold requirement when compared to the users response.
-    * addWord(word, ref) - This function takes a word when building the trie and adds a reference to it on each node that it is a part of. If there is no match then a new node is created for the trie.
+    * addWord(word, ref, iter) - This function takes a word when building the trie and adds a reference to it on each node that it is a part of. If there is no match then a new node is created for the trie. 'iter' is used to check to see if we are adding the original word or a synonym. This prevents looping.
+    * addSyns(word, ref) - Adds all of the known eglish synonyms of the word to the trie.
     * build() - The function that builds the initial trie from an existing array of questions/phrases asked by the user with correlating responses that the bot knows. The function will also replace words with accents on them to make it easier to work with later on.
   * trieNode() - This creates a new node in the trie.
 
@@ -87,3 +88,12 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
     * getInitialStatement() - Contains the initial statement once a game of hangman is started.
     * getGuessFromString(str) - This functions extracts the letter guessed by the user from their input.
   * getHangmanResponse(str) - This function makes use of the functions above in order to start the game, and calls the appropriate functions throughout the game.
+  
+* **VoiceLoad.js**
+  * loadVoice() - Function that is called by ChatBot.js when the window loads. This sets up the language toggle button.
+  * speal(phrase) - Function that is used to speak any string that is given to it with the currently selected language (English or French).
+  
+* **VoiceRecLoad.js**
+  * loadVoiceRec() - Function that is called by ChatBot.js when the window loads. This sets up the speech input button and the voice recognition object.
+  * setRecLang(lang) - Sets the current language that should be detected
+  * resetVoiceRec() - Resets the color of the speech input button after a timeout
