@@ -93,7 +93,8 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 ## Assignment 3 
   
 **Implemented Features**
-   * Implemented a feature that can handle when the user enters small giberish phrases or letters that do not form words.
+   * I implemented an additional topic for the user to communicate to the chatbot with. The topic that I chose was music, the chatbot is able to respond to the users statements about favorite songs or bands and an instrument that the user may play. The chatbot can also answer simple music theory related questions (eg. What is a time signature?) to continue with the idea that we designed our chatbot to be a program that could help a user learn another language, in this case it is musical language. 
+   * The functionality is obviously limited due to the fact that it would be difficult for the system to interpret actual sheet music or musical notes, but given enough time the system could be provided with more functionality to potentially allow this. These improvements are only available in English right now, there was not enough time to translate The statements to another language. 
    
 **Feature Descriptions**
   * GUI - the graphical user interface designed for our system provides a colorful and enjoyable experience to match the light-hearted nature of our chatbot. The GUI allows users to view all previous messages sent and responses from the chatbot as well. **This feature was implemented in A2**
@@ -141,3 +142,7 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 * **Example**
 
   ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Incorrect_Output_2.png?raw=true)
+  
+**Exportable Features**
+  * Data Structure - The best part about our chatbot is the trie data structure, it is extremely versitle and efficient for the uses of this project. The trie does suffer from time complexity issues when attempting to remove information from the trie but that is not our concern with this project.
+  * Hangman game - While the hangman game is only really compatable with the data structure the core functionality is still available for use in this case. 
