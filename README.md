@@ -134,7 +134,7 @@ In **Public > Javascripts**, we have 'ChatBot.js' which includes all the main fu
 
 * **Example**
   
-  ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/No_Correlation.png?raw=true)
+  ![](https://github.com/Ncookiez/310-Cell-Project/blob/JH/public/images/Incorrect_Output_1.png?raw=true)
   
 * **Incorrect Correlation**
   As stated before our system is correlation based, this can pose potential problems when a user enters two strings that are the same but may have slightly different syntax to them. This means that the system can output two different reponses to statements that are similar in content but possibly use different words or incorrect grammar. Therefore the system is only as accurate as the sentences that are created for it. 
